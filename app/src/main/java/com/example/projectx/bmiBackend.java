@@ -1,7 +1,5 @@
 package com.example.projectx;
 
-import com.example.projectx.Bmi;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -42,17 +40,22 @@ public class bmiBackend {
                 Node node = nList.item(i);
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     Element element = (Element) node;
+                    //ArrayList<String> theatreInfo = new ArrayList<String>();
                     String year = element.getElementsByTagName("YEAR").item(0).getTextContent();
-                    String name = element.getElementsByTagName("Numeric").item(0).getTextContent();
+                    String bmi = element.getElementsByTagName("Numeric").item(0).getTextContent();
                     String sex = element.getElementsByTagName("SEX").item(0).getTextContent();
-                    System.out.println(year +" "+ name +" "+ sex);
-                    bmiData.add(new Bmi(name, year, sex));
+                    bmiData.add(new Bmi(year, bmi, sex));
                 }
 
             }
 
         } catch (ParserConfigurationException | IOException | SAXException e) {
             e.printStackTrace();
+        }
+    }
+    public void printBmiList(){
+        for (int i = 0; i < bmiData.size(); i++){
+            System.out.println(bmiData.get(i).getYear());
         }
     }
 }
