@@ -42,7 +42,6 @@ public class bmiBackend {
                 Node node = nList.item(i);
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     Element element = (Element) node;
-                    //ArrayList<String> theatreInfo = new ArrayList<String>();
                     String year = element.getElementsByTagName("YEAR").item(0).getTextContent();
                     String name = element.getElementsByTagName("Numeric").item(0).getTextContent();
                     String sex = element.getElementsByTagName("SEX").item(0).getTextContent();
