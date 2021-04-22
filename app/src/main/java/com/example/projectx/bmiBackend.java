@@ -1,4 +1,6 @@
-package com.example.projectx;
+package com.bmiapplication;
+
+import com.example.projectx.Bmi;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -18,11 +20,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 /*https://apps.who.int/gho/athena/api/GHO/NCD_BMI_MEAN.json?filter=COUNTRY:FIN&profile=simple*/
 public class bmiBackend {
-    ArrayList<String> theatreId = new ArrayList<String>();
-    ArrayList<String> theatreInfo = new ArrayList<String>();
-    private String year;
-    private String name;
-    private String sex;
+    ArrayList<Bmi> bmiData = new ArrayList<Bmi>();
 
     public void whoRequest() {
     }
@@ -38,17 +36,18 @@ public class bmiBackend {
             doc.getDocumentElement().normalize();
             System.out.println("ROOT ELEMENT: " + doc.getDocumentElement().getNodeName());
             NodeList nList = doc.getDocumentElement().getElementsByTagName("Fact");
+
             for (int i = 0; i < nList.getLength(); i++) {
 
                 Node node = nList.item(i);
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     Element element = (Element) node;
-                    //System.out.println(element);
-                    year = element.getElementsByTagName("YEAR").item(0).getTextContent();
-                    name = element.getElementsByTagName("Numeric").item(0).getTextContent();
-                    sex = element.getElementsByTagName("SEX").item(0).getTextContent();
-                    System.out.println(year+" "+name+" "+sex);
-                    //bmiInfo(name, ID);
+                    //ArrayList<String> theatreInfo = new ArrayList<String>();
+                    String year = element.getElementsByTagName("YEAR").item(0).getTextContent();
+                    String name = element.getElementsByTagName("Numeric").item(0).getTextContent();
+                    String sex = element.getElementsByTagName("SEX").item(0).getTextContent();
+                    System.out.println(year +" "+ name +" "+ sex);
+                    bmiData.add(new Bmi(name, year, sex));
                 }
 
             }
@@ -56,22 +55,5 @@ public class bmiBackend {
         } catch (ParserConfigurationException | IOException | SAXException e) {
             e.printStackTrace();
         }
-    }
-    public void bmiInfo(String name, String ID) {
-        this.year = ID;
-        this.name = name;
-        //System.out.println(this.name);
-        theatreInfo.add (this.name);
-        theatreId.add(this.year);
-        System.out.println("name: " + this.name + "ID: " +this.year);
-    }
-
-    public ArrayList<String> getTheatreInfo() {
-        request();
-        return theatreInfo;
-    }
-
-    public ArrayList<String> getTheatreId() {
-        return theatreId;
     }
 }
