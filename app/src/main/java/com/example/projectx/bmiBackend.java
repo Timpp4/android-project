@@ -1,4 +1,4 @@
-package com.bmiapplication;
+package com.example.projectx;
 
 import com.example.projectx.Bmi;
 
