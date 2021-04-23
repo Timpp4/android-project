@@ -10,22 +10,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-public class LoginFragment extends Fragment implements View.OnClickListener{
+public class RegisterFragment extends Fragment implements View.OnClickListener{
 
-    Button loginButton;
+    Button signUpButton;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_login, container, false);
-        loginButton = (Button) v.findViewById(R.id.btn_login);
-        loginButton.setOnClickListener(this);
+        View v = inflater.inflate(R.layout.fragment_register, container, false);
+        signUpButton = (Button) v.findViewById(R.id.btn_sign);
         return v;
     }
 
 
     @Override
     public void onClick(View view) {
-
+        //TODO: implement login logic here
     }
 }
