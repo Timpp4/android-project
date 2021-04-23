@@ -14,6 +14,8 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
 
@@ -23,17 +25,20 @@ public class HomeFragment extends Fragment {
     private View paramView;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         paramView = inflater.inflate(R.layout.fragment_home, container, false);
         mpLineChart = (LineChart) paramView.findViewById(R.id.chart);
         mpLineChart.getAxisLeft().setEnabled(false);
         mpLineChart.getAxisRight().setEnabled(false);
         mpLineChart.getDescription().setEnabled(false);
+        mpLineChart.getXAxis().setDrawGridLines(false);
         mpLineChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
 
         LineDataSet lineDataSet1 = new LineDataSet(userBmiValues(), "Oma BMI");
+        lineDataSet1.setLineWidth(2);
         lineDataSet1.setColor(Color.GREEN);
+        lineDataSet1.setDrawFilled(true);
         lineDataSet1.setValueTextSize(12f);
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();
         dataSets.add(lineDataSet1);
@@ -48,6 +53,7 @@ public class HomeFragment extends Fragment {
         return paramView;
     }
 
+    @NotNull
     private ArrayList<Entry> userBmiValues()
     {
         //TODO: Lisää profiililta paino ja päivänmäärä data tähän. (x=bmi, y= pvm)
@@ -61,6 +67,7 @@ public class HomeFragment extends Fragment {
         return userBmiVals;
     }
 
+    @NotNull
     private ArrayList<Entry> whoBmiConstant()
     {
         //TODO: Lisää profiililta paino ja päivänmäärä data tähän.
