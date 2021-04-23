@@ -30,9 +30,9 @@ public class ChooseFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view.getId() == logInButton.getId()) {
-            ((MainActivity) getActivity()).navigateToLogin();
+            ((LoginSignUp) getActivity()).navigateToLogin();
         } else if (view.getId() == signUpButton.getId()) {
-            ((MainActivity) getActivity()).navigateToSignUp();
+            ((LoginSignUp) getActivity()).navigateToSignUp();
         }
     }
 }

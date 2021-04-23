@@ -1,5 +1,6 @@
 package com.example.projectx;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -30,10 +31,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         if (view.getId() == loginButton.getId()) {
-            ((MainActivity) Objects.requireNonNull(getActivity())).navigateToHomeFragment();
-        }
-            //new MainActivity().navigateToHomeFragment();
+            Intent MainIntent = new Intent(getActivity(), MainActivity.class);
+            startActivity(MainIntent);
 
-            System.out.println("******** HALOOOOOO ********");
+        }
+            //((LoginSignUp) getActivity()).MainActivity();
     }
 }
