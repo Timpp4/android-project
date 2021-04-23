@@ -14,15 +14,17 @@ import com.github.mikephil.charting.charts.LineChart;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    LineChart mpLineChart;
+
     private BottomNavigationView bottomNavigationView;
     private FragmentManager fragmentManager;
     private ChooseFragment chooseFragment;
     private LoginFragment loginFragment;
     private RegisterFragment registerFragment;
+    private HomeFragment homeFragment;
 
 
     @Override
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         chooseFragment = new ChooseFragment();
         loginFragment = new LoginFragment();
         registerFragment = new RegisterFragment();
+        homeFragment = new HomeFragment();
         //getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).add(R.id.container, new LoginFragment()).commit();
         //bottomNavigationView = findViewById(R.id.bottomNavigation);
         //bottomNavigationView.setOnNavigationItemSelectedListener(bottomNavigationMethod);
@@ -47,18 +50,21 @@ public class MainActivity extends AppCompatActivity {
     public void navigateToLogin(){
         fragmentManager = getSupportFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();
+        hideAllVisibleFragment(ft);
 
         if (!loginFragment.isAdded()){
             ft.add(R.id.a_login_content, loginFragment, loginFragment.getClass().getName());
         }else{
             ft.show(loginFragment);
         }
+
         ft.addToBackStack(null).commit();
     }
 
     public void navigateToSignUp(){
         fragmentManager = getSupportFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();
+        hideAllVisibleFragment(ft);
 
         if (!loginFragment.isAdded()){
             ft.add(R.id.a_login_content, registerFragment, registerFragment.getClass().getName());
@@ -68,6 +74,35 @@ public class MainActivity extends AppCompatActivity {
         ft.addToBackStack(null).commit();
     }
 
+    private List<Fragment> getVisibleFragments() {
+
+        // We have 3 fragments, so initialize the arrayList to 3 to optimize memory
+        List<Fragment> result = new ArrayList<>(3);
+
+        // Add each visible fragment to the result
+        if (chooseFragment.isVisible()) {
+            result.add(chooseFragment);
+        }
+        if (loginFragment.isVisible()) {
+            result.add(loginFragment);
+        }
+        if (registerFragment.isVisible()) {
+            result.add(registerFragment);
+        }
+
+        return result;
+    }
+
+    private FragmentTransaction hideAllVisibleFragment(FragmentTransaction fragmentTransaction) {
+        for (Fragment fragment : getVisibleFragments()) {
+            fragmentTransaction.hide(fragment);
+        }
+        return fragmentTransaction;
+    }
+
+    public void navigateToHome() {
+
+    }
 
     /*private BottomNavigationView.OnNavigationItemSelectedListener bottomNavigationMethod = new
             BottomNavigationView.OnNavigationItemSelectedListener() {

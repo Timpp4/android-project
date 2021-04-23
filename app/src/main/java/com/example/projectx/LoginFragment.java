@@ -14,6 +14,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
 
     Button loginButton;
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -26,6 +27,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
+        if (view.getId() == loginButton.getId()) {
+            ((MainActivity) getActivity()).navigateToHome();
+            System.out.println("******** HALOOOOOO ********");
 
+        }
     }
 }
