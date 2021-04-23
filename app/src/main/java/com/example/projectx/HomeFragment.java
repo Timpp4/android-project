@@ -1,5 +1,6 @@
 package com.example.projectx;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -25,11 +27,19 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         paramView = inflater.inflate(R.layout.fragment_home, container, false);
         mpLineChart = (LineChart) paramView.findViewById(R.id.chart);
+        mpLineChart.getAxisLeft().setEnabled(false);
+        mpLineChart.getAxisRight().setEnabled(false);
+        mpLineChart.getDescription().setEnabled(false);
+        mpLineChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
 
         LineDataSet lineDataSet1 = new LineDataSet(userBmiValues(), "Oma BMI");
+        lineDataSet1.setColor(Color.GREEN);
+        lineDataSet1.setValueTextSize(12f);
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();
         dataSets.add(lineDataSet1);
         LineDataSet lineDataSet2 = new LineDataSet(whoBmiConstant(), "Vertailu BMI");
+        lineDataSet2.setColor(Color.RED);
+        lineDataSet2.setValueTextSize(12f);
         dataSets.add(lineDataSet2);
         LineData data = new LineData(dataSets);
         mpLineChart.setData(data);
