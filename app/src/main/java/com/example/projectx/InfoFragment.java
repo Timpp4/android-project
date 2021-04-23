@@ -64,6 +64,6 @@ public class InfoFragment extends Fragment {
 
     public void whoRequest(){
         bmiBackend bb = new bmiBackend();
-        bb.request();
+        bb.whoRequest();
     }
 }

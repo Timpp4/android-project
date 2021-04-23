@@ -29,6 +29,8 @@ public class HomeFragment extends Fragment {
         LineDataSet lineDataSet1 = new LineDataSet(dataValues1(), "Data set 1");
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();
         dataSets.add(lineDataSet1);
+        LineDataSet lineDataSet2 = new LineDataSet(dataValues2(), "Data set 2");
+        dataSets.add(lineDataSet2);
         LineData data = new LineData(dataSets);
         mpLineChart.setData(data);
         mpLineChart.invalidate();
@@ -38,11 +40,25 @@ public class HomeFragment extends Fragment {
 
     private ArrayList<Entry> dataValues1()
     {
+        //TODO: Lisää profiililta paino ja päivänmäärä data tähän. (x=bmi, y= pvm)
         ArrayList<Entry> dataVals = new ArrayList<Entry>();
         dataVals.add(new Entry(0, 20));
         dataVals.add(new Entry(1, 24));
         dataVals.add(new Entry(2, 5));
         dataVals.add(new Entry(3, 10));
+        dataVals.add(new Entry(4, 25));
+
+        return dataVals;
+    }
+
+    private ArrayList<Entry> dataValues2()
+    {
+        //TODO: Lisää profiililta paino ja päivänmäärä data tähän.
+        ArrayList<Entry> dataVals = new ArrayList<Entry>();
+        dataVals.add(new Entry(0, 25));
+        dataVals.add(new Entry(1, 25));
+        dataVals.add(new Entry(2, 25));
+        dataVals.add(new Entry(3, 25));
         dataVals.add(new Entry(4, 25));
 
         return dataVals;

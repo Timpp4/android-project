@@ -11,18 +11,21 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.lang.*;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+/**
+ * Tämä luokka hakee tietoa WHOn Athena APIsta, jossa on keskimääräiset BMIt vuosittain maan ja
+ * sukupuolen mukaan.
+ */
 /*https://apps.who.int/gho/athena/api/GHO/NCD_BMI_MEAN.json?filter=COUNTRY:FIN&profile=simple*/
 public class bmiBackend {
     ArrayList<Bmi> bmiData = new ArrayList<Bmi>();
 
-    public void whoRequest() {
-    }
-    public void request () {
+    public void whoRequest () {
         try {
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             URL url = new URL("https://apps.who.int/gho/athena/api/GHO/NCD_BMI_MEAN.xml?filter=COUNTRY:FIN&profile=simple");
@@ -32,7 +35,7 @@ public class bmiBackend {
             InputStream inputFile = urlc.getInputStream();
             Document doc = builder.parse(inputFile);
             doc.getDocumentElement().normalize();
-            System.out.println("ROOT ELEMENT: " + doc.getDocumentElement().getNodeName());
+            //System.out.println("ROOT ELEMENT: " + doc.getDocumentElement().getNodeName());
             NodeList nList = doc.getDocumentElement().getElementsByTagName("Fact");
 
             for (int i = 0; i < nList.getLength(); i++) {
@@ -53,9 +56,14 @@ public class bmiBackend {
             e.printStackTrace();
         }
     }
-    public void printBmiList(){
+    public String getBmiFromWho(String sex, String year){
+        //double avgBmi = 0;
+        String avgBmiByYear = null;
         for (int i = 0; i < bmiData.size(); i++){
-            System.out.println(bmiData.get(i).getYear());
+            if (bmiData.get(i).getYear().equals(year) & bmiData.get(i).getSex().equals(sex))
+                //avgBmi = Double.parseDouble(bmiData.get(i).getBmi());
+                avgBmiByYear = (bmiData.get(i).getBmi());
         }
+        return avgBmiByYear;
     }
 }
