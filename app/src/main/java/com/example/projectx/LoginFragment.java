@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import java.util.Objects;
+
 public class LoginFragment extends Fragment implements View.OnClickListener{
 
     Button loginButton;
@@ -28,9 +30,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         if (view.getId() == loginButton.getId()) {
-            ((MainActivity) getActivity()).navigateToHome();
-            System.out.println("******** HALOOOOOO ********");
-
+            ((MainActivity) Objects.requireNonNull(getActivity())).navigateToHomeFragment();
         }
+            //new MainActivity().navigateToHomeFragment();
+
+            System.out.println("******** HALOOOOOO ********");
     }
 }

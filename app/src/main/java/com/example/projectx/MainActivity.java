@@ -74,6 +74,20 @@ public class MainActivity extends AppCompatActivity {
         ft.addToBackStack(null).commit();
     }
 
+    /*public void navigateToHomeFragment(){
+        fragmentManager = getSupportFragmentManager();
+        FragmentTransaction ft = fragmentManager.beginTransaction();
+        hideAllVisibleFragment(ft);
+
+        if (!homeFragment.isAdded()){
+            ft.add(R.id.a_mainactivity_content, homeFragment, homeFragment.getClass().getName());
+        }else{
+            ft.show(homeFragment);
+        }
+
+        ft.addToBackStack(null).commit();
+    }*/
+
     private List<Fragment> getVisibleFragments() {
 
         // We have 3 fragments, so initialize the arrayList to 3 to optimize memory
@@ -100,11 +114,9 @@ public class MainActivity extends AppCompatActivity {
         return fragmentTransaction;
     }
 
-    public void navigateToHome() {
 
-    }
 
-    /*private BottomNavigationView.OnNavigationItemSelectedListener bottomNavigationMethod = new
+    private BottomNavigationView.OnNavigationItemSelectedListener bottomNavigationMethod = new
             BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -134,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
 
                     return true;
                 }
-            };*/
+            };
 
 
 }
