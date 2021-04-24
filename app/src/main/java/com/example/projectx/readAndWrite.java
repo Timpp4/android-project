@@ -15,7 +15,7 @@ public class readAndWrite {
     // Parse through userInfo.txt to validate given username and password for app access
     public boolean readFile(String username, String password) {
         try {
-            File path = context.getFilesDir();
+            File path = context.getExternalFilesDir(null);
             File file = new File(path, "userInfo.txt");
             int length = (int) file.length();
             byte[] bytes = new byte[length];
@@ -37,7 +37,7 @@ public class readAndWrite {
                 //System.out.println(user_parsed[0] + " ja " + user_parsed[1]);
                 if (user_parsed[0].equals(username)) {
                     if (user_parsed[1].equals(password)) {
-                        System.out.println("You have successfully logged in!");
+                        System.out.println("You have successfully logged in! (readandwrite.java)");
                         return true;
                     }
                 }
@@ -47,13 +47,13 @@ public class readAndWrite {
         } catch (Exception e) {
             System.out.println(e);
         }
-
         return false;
     }
 
     public boolean checkIfUserExist(String username) {
         try {
             File path = context.getExternalFilesDir(null);
+
             File file = new File(path, "userInfo.txt");
             int length = (int) file.length();
             byte[] bytes = new byte[length];
