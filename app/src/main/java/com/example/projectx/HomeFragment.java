@@ -110,6 +110,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         return userBmiVals;
     }
 
+    //Run dates from userdata and search country-specific average BMI from WHO API
     @NotNull
     private ArrayList<Entry> whoBmiConstant()
     /**
