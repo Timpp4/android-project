@@ -1,5 +1,7 @@
 package com.example.projectx;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -11,6 +13,7 @@ import androidx.fragment.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -29,6 +32,8 @@ public class HomeFragment extends Fragment {
 
     LineChart mpLineChart;
     TextView date;
+    EditText weight;
+    String selectedDate;
     private View paramView;
 
     @Override
@@ -47,6 +52,7 @@ public class HomeFragment extends Fragment {
          */
         mpLineChart = (LineChart) paramView.findViewById(R.id.chart);
         date = (TextView) paramView.findViewById(R.id.textDate);
+        weight = (EditText) paramView.findViewById(R.id.textWeight);
 
         mpLineChart.getAxisLeft().setEnabled(false);
         mpLineChart.getAxisRight().setEnabled(false);
@@ -89,13 +95,32 @@ public class HomeFragment extends Fragment {
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AppCompatDialogFragment newFragment = new DatePickerFragment();
-                newFragment.setTargetFragment(HomeFragment.this, 11);
-                newFragment.show(fm, "datePicker");
+                AppCompatDialogFragment dateFragment = new DatePickerFragment();
+                dateFragment.setTargetFragment(HomeFragment.this, 0);
+                dateFragment.show(fm, "datePicker");
             }
         });
+        weight.setOnClickListener(
+                new View.OnClickListener()
+                {
+                    public void onClick(View view)
+                    {
+                        double weightInput = Double.parseDouble(String.valueOf(weight.getText()));
+                    }
+                });
 
         return paramView;
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // check for the results
+        if (requestCode == 0 && resultCode == Activity.RESULT_OK) {
+            // get date from string
+            selectedDate = data.getStringExtra("selectedDate");
+            // set the value of the editText
+            System.out.println("************* SELECTED DATE ********: " + selectedDate);
+            date.setText(selectedDate);
+        }
     }
 
     @NotNull

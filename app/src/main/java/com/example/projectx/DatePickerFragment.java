@@ -36,14 +36,13 @@ public class DatePickerFragment extends AppCompatDialogFragment implements DateP
         calendar.set(Calendar.YEAR, year);
         calendar.set(Calendar.MONTH, month);
         calendar.set(Calendar.DAY_OF_MONTH, day);
-        String date = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).format(calendar.getTime());
+        String dateSet = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH).format(calendar.getTime());
 
-        Log.d ("***DatePickerFragment:" , "DATE:" + date);
-
+        Log.d("DatePickerFragment", "Selected date: " + dateSet);
         getTargetFragment().onActivityResult(
-                getTargetRequestCode(),
-                Activity.RESULT_OK,
-                new Intent().putExtra("date", date)
+        getTargetRequestCode(),
+        Activity.RESULT_OK,
+        new Intent().putExtra("Selected date: ", dateSet)
         );
     }
 }
