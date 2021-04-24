@@ -92,11 +92,10 @@
         android:layout_centerInParent="true"
         android:textSize="15sp" />
 
-    <EditText
-        android:id="@+id/et_sex"
+    <Spinner
+        android:id="@+id/et_sexSpinner"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:hint="Male/Female/Other"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
@@ -110,7 +109,7 @@
         android:id="@+id/btn_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/et_sex"
+        android:layout_below="@id/et_sexSpinner"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="15dp"
