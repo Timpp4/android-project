@@ -28,6 +28,10 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         paramView = inflater.inflate(R.layout.fragment_home, container, false);
+
+        /**
+         * Tässä blokissa määritellään kuvaaja sekä kuvaajien tyylit
+        */
         mpLineChart = (LineChart) paramView.findViewById(R.id.chart);
         mpLineChart.getAxisLeft().setEnabled(false);
         mpLineChart.getAxisRight().setEnabled(false);
@@ -35,17 +39,24 @@ public class HomeFragment extends Fragment {
         mpLineChart.getXAxis().setDrawGridLines(false);
         mpLineChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
 
+        //Alustetaan lista esitettäville kuvaajille
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+
+        // Oma BMI kuvaajan alustus, tyylit ja lisäys
         LineDataSet lineDataSet1 = new LineDataSet(userBmiValues(), "Oma BMI");
         lineDataSet1.setLineWidth(2);
         lineDataSet1.setColor(Color.GREEN);
         lineDataSet1.setDrawFilled(true);
         lineDataSet1.setValueTextSize(12f);
-        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
         dataSets.add(lineDataSet1);
+
+        // Vertailu BMI kuvaajan alustus, tyylit ja lisäys
         LineDataSet lineDataSet2 = new LineDataSet(whoBmiConstant(), "Vertailu BMI");
         lineDataSet2.setColor(Color.RED);
         lineDataSet2.setValueTextSize(12f);
         dataSets.add(lineDataSet2);
+
+        //Kuvaajien luonti UI:lle
         LineData data = new LineData(dataSets);
         mpLineChart.setData(data);
         mpLineChart.invalidate();
@@ -55,6 +66,9 @@ public class HomeFragment extends Fragment {
 
     @NotNull
     private ArrayList<Entry> userBmiValues()
+    /**
+     * Tässä aliohjelmassa luetaan käyttän painodata ja muunnetaan BMI:ksi BMI luokan avulla
+     */
     {
         //TODO: Lisää profiililta paino ja päivänmäärä data tähän. (x=bmi, y= pvm)
         ArrayList<Entry> userBmiVals = new ArrayList<Entry>();
@@ -69,6 +83,10 @@ public class HomeFragment extends Fragment {
 
     @NotNull
     private ArrayList<Entry> whoBmiConstant()
+    /**
+     * Tässä aliohjelmassa ajetaan käyttäjätiedoista päivämäärät ja asetetaan WHO AthenaAPIsta
+     * vuoden ja sukupuolen mukaan haettu maakohtainen keskibmi
+     */
     {
         //TODO: Lisää profiililta paino ja päivänmäärä data tähän.
         ArrayList<Entry> whoBmiVals = new ArrayList<Entry>();
