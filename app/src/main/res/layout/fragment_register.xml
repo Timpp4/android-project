@@ -106,18 +106,17 @@
         android:textSize="15sp" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_signup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/et_sexSpinner"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="14dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/btn_custom"
-        android:onClick="register"
+        android:onClick="onClick"
         android:text="Sign up"
         android:textColor="@android:color/white" />
-
 
 
 </RelativeLayout>

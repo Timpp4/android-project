@@ -15,16 +15,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 //vanha
-//public class RegisterFragment extends Fragment implements View.OnClickListener{
-public class RegisterFragment extends Fragment {
+public class RegisterFragment extends Fragment implements View.OnClickListener{
+//public class RegisterFragment extends Fragment {
 
     Button signUpButton;
     Spinner spinner;
-    private View paramView;
-    private Context context;
-    public void readAndWrite(Context context){
-        this.context=context;
-    }
+    public View paramView;
+    //private Context context;
+    //public void readAndWrite(Context context){
+    //    this.context=context;
+    //}
 
 
 
@@ -32,7 +32,7 @@ public class RegisterFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_register, container, false);
-        signUpButton = (Button) v.findViewById(R.id.btn_sign);
+        signUpButton = (Button) v.findViewById(R.id.btn_signup);
         Spinner spinner = v.findViewById(R.id.et_sexSpinner);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
@@ -44,8 +44,8 @@ public class RegisterFragment extends Fragment {
     }
 
 
-    //@Override
-    public void register(View v) {
+    @Override
+    public void onClick(View view) {
         readAndWrite rw = new readAndWrite(this);
         TextView tv_user = paramView.findViewById(R.id.et_username);
         TextView tv_pass = paramView.findViewById(R.id.et_password);
@@ -63,9 +63,12 @@ public class RegisterFragment extends Fragment {
                 height,
                 age,
                 tv_sex.getText().toString()) == true) {
+
             System.out.println("pääohjelmassa true, siirry kirjautumiseen");
+            ((LoginSignUp) getActivity()).navigateToLogin();
         } else {
             System.out.println("Pääohjelmassa false, käyttäjää ei luotu, anna virheilmoitus");
         }
     }
+
 }
