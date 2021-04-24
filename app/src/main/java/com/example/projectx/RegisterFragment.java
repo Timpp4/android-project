@@ -1,6 +1,7 @@
 package com.example.projectx;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -18,13 +20,10 @@ import android.widget.TextView;
 public class RegisterFragment extends Fragment implements View.OnClickListener{
 //public class RegisterFragment extends Fragment {
 
-    Button signUpButton;
+    public Button signUpButton;
     Spinner spinner;
     public View paramView;
-    //private Context context;
-    //public void readAndWrite(Context context){
-    //    this.context=context;
-    //}
+
 
 
 
@@ -33,6 +32,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_register, container, false);
         signUpButton = (Button) v.findViewById(R.id.btn_signup);
+        signUpButton.setOnClickListener(this);
         Spinner spinner = v.findViewById(R.id.et_sexSpinner);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
@@ -46,26 +46,48 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
-        readAndWrite rw = new readAndWrite(this);
-        TextView tv_user = paramView.findViewById(R.id.et_username);
-        TextView tv_pass = paramView.findViewById(R.id.et_password);
-        TextView tv_height = paramView.findViewById(R.id.et_height);
-        double height = Double.valueOf(tv_height.getText().toString());
-        TextView tv_weight = paramView.findViewById(R.id.et_weight);
+
+        readAndWrite rw = new readAndWrite(getContext());
+
+        EditText tv_user = getView().findViewById(R.id.et_username);
+        System.out.println(tv_user.getText().toString());
+
+        EditText tv_pass = getView().findViewById(R.id.et_password);
+        System.out.println(tv_pass.getText().toString());
+
+        EditText tv_height = getView().findViewById(R.id.et_height);
+        System.out.println(tv_height.getText().toString());
+        double height =  Double.parseDouble(tv_height.getText().toString());
+        System.out.println(height);
+
+        EditText tv_weight = getView().findViewById(R.id.et_weight);
+        System.out.println(tv_weight.getText().toString());
         double weight = Double.valueOf(tv_weight.getText().toString());
-        TextView tv_age = paramView.findViewById(R.id.et_age);
+        System.out.println(weight);
+
+        EditText tv_age = getView().findViewById(R.id.et_age);
+        System.out.println(tv_weight.getText().toString());
         int age = Integer.valueOf(tv_age.getText().toString());
-        TextView tv_sex = paramView.findViewById(R.id.et_sexSpinner);
+        System.out.println(age);
+
+        Spinner tv_sex = (Spinner) getView().findViewById(R.id.et_sexSpinner);
+        String gender = tv_sex.getSelectedItem().toString();
+        System.out.println(gender);
 
         if (rw.createNewUser(tv_user.getText().toString(),
                 tv_pass.getText().toString(),
                 height,
-                height,
+                weight,
                 age,
-                tv_sex.getText().toString()) == true) {
+                gender) == true) {
 
-            System.out.println("pääohjelmassa true, siirry kirjautumiseen");
-            ((LoginSignUp) getActivity()).navigateToLogin();
+            if (view.getId() == signUpButton.getId()) {
+                ((LoginSignUp) getActivity()).navigateToLogin();
+                System.out.println("pääohjelmassa true, siirry kirjautumiseen");
+
+            }
+
+
         } else {
             System.out.println("Pääohjelmassa false, käyttäjää ei luotu, anna virheilmoitus");
         }

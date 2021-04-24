@@ -114,7 +114,6 @@
         android:layout_marginTop="14dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/btn_custom"
-        android:onClick="onClick"
         android:text="Sign up"
         android:textColor="@android:color/white" />
 
