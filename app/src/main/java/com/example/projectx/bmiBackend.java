@@ -23,7 +23,7 @@ import javax.xml.parsers.ParserConfigurationException;
  */
 /*https://apps.who.int/gho/athena/api/GHO/NCD_BMI_MEAN.json?filter=COUNTRY:FIN&profile=simple*/
 public class bmiBackend {
-    ArrayList<Bmi> bmiData = new ArrayList<Bmi>();
+    ArrayList<bmiObject> bmiData = new ArrayList<bmiObject>();
 
     public void whoRequest () {
         try {
@@ -47,7 +47,7 @@ public class bmiBackend {
                     String year = element.getElementsByTagName("YEAR").item(0).getTextContent();
                     String bmi = element.getElementsByTagName("Numeric").item(0).getTextContent();
                     String sex = element.getElementsByTagName("SEX").item(0).getTextContent();
-                    bmiData.add(new Bmi(year, bmi, sex));
+                    bmiData.add(new bmiObject(year, bmi, sex));
                 }
 
             }

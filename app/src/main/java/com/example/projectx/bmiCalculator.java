@@ -1,6 +1,6 @@
 package com.example.projectx;
 
-public class BmiCalculator {
+public class bmiCalculator {
     double weight;
     double height;
     double bmi;

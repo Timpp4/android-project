@@ -1,12 +1,12 @@
 package com.example.projectx;
 
-public class Bmi {
+public class bmiObject {
 
 	private String year;
 	private String bmi;
 	private String sex;
 
-	public Bmi(String year, String bmi, String sex) {
+	public bmiObject(String year, String bmi, String sex) {
 		this.year = year;
 		this.bmi = bmi;
 		this.sex = sex;
