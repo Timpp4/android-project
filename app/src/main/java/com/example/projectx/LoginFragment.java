@@ -39,8 +39,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
 
         if (rw.readFile(tv_user.getText().toString(),
                 tv_pass.getText().toString()) == true) {
+            // Start MainActivity after login information input
             if (view.getId() == loginButton.getId()) {
                 System.out.println("loginfragmentissa..........");
+                // MainActivity executes bottomNavigation fragment
                 Intent MainIntent = new Intent(getActivity(), MainActivity.class);
                 startActivity(MainIntent);
 
@@ -48,9 +50,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
 
         }
 
-        //if (view.getId() == loginButton.getId()) {
-        //    Intent MainIntent = new Intent(getActivity(), MainActivity.class);
-        //    startActivity(MainIntent);
-        }
-        //((LoginSignUp) getActivity()).MainActivity();
     }
+
+}

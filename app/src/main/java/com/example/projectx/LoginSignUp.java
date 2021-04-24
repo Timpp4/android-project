@@ -11,7 +11,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
-
+// Class for choosing login fragments
 public class LoginSignUp extends AppCompatActivity {
 
 
