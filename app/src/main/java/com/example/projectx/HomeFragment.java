@@ -60,10 +60,10 @@ public class HomeFragment extends Fragment {
         mpLineChart.getXAxis().setDrawGridLines(false);
         mpLineChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
 
-        //Alustetaan lista esitettäville kuvaajille
+        //Initializing the list for graphs
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();
 
-        // Oma BMI kuvaajan alustus, tyylit ja lisäys
+        // Initializing BMI graphs and styles
         LineDataSet lineDataSet1 = new LineDataSet(userBmiValues(), "Oma BMI");
         lineDataSet1.setLineWidth(2);
         lineDataSet1.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
@@ -77,7 +77,7 @@ public class HomeFragment extends Fragment {
         lineDataSet1.setValueTextSize(12f);
         dataSets.add(lineDataSet1);
 
-        // Vertailu BMI kuvaajan alustus, tyylit ja lisäys
+        // Initializing Comparison graph and styles
         LineDataSet lineDataSet2 = new LineDataSet(whoBmiConstant(), "Vertailu BMI");
         lineDataSet2.setColor(Color.RED);
         lineDataSet2.setLineWidth(3f);
@@ -85,7 +85,7 @@ public class HomeFragment extends Fragment {
         lineDataSet2.setDrawValues(false);
         dataSets.add(lineDataSet2);
 
-        //Kuvaajien luonti UI:lle
+        //Creating graphs to UI
         LineData data = new LineData(dataSets);
         mpLineChart.setData(data);
         mpLineChart.invalidate();
