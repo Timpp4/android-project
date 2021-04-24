@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class LoginFragment extends Fragment implements View.OnClickListener{
 
@@ -28,11 +29,28 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == loginButton.getId()) {
-            Intent MainIntent = new Intent(getActivity(), MainActivity.class);
-            startActivity(MainIntent);
+        readAndWrite rw = new readAndWrite(getContext());
 
+        EditText tv_user = getView().findViewById(R.id.et_email);
+        System.out.println(tv_user.getText().toString());
+
+        EditText tv_pass = getView().findViewById(R.id.et_password);
+        System.out.println(tv_pass.getText().toString());
+
+        if (rw.readFile(tv_user.getText().toString(),
+                tv_pass.getText().toString()) == true) {
+            if (view.getId() == loginButton.getId()) {
+                System.out.println("loginfragmentissa..........");
+                Intent MainIntent = new Intent(getActivity(), MainActivity.class);
+                startActivity(MainIntent);
+
+            }
+
+        }
+
+        //if (view.getId() == loginButton.getId()) {
+        //    Intent MainIntent = new Intent(getActivity(), MainActivity.class);
+        //    startActivity(MainIntent);
         }
         //((LoginSignUp) getActivity()).MainActivity();
     }
-}
