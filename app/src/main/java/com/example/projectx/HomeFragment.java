@@ -8,8 +8,12 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +40,11 @@ public class HomeFragment extends Fragment {
     LineChart mpLineChart;
     TextView date;
     private View paramView;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
@@ -85,6 +94,17 @@ public class HomeFragment extends Fragment {
         mpLineChart.setData(data);
         mpLineChart.invalidate();
 
+        final FragmentManager fm = ((AppCompatActivity)getActivity()).getSupportFragmentManager();
+
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppCompatDialogFragment newFragment = new DatePickerFragment();
+                newFragment.setTargetFragment(HomeFragment.this, 11);
+                newFragment.show(fm, "datePicker");
+            }
+        });
+
         return paramView;
     }
 
@@ -123,10 +143,4 @@ public class HomeFragment extends Fragment {
 
         return whoBmiVals;
     }
-
-    @SuppressLint("SetTextI18n")
-    public void timePicker(View v) {
-
-    }
-
 }
