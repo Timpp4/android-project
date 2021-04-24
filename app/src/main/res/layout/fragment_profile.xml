@@ -13,7 +13,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:background="@color/teal_200"
+            android:background="@color/purple_200"
             android:layout_height="match_parent">
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -193,6 +193,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:layout_gravity="center"
+            app:backgroundTint="@color/purple_200"
             app:cornerRadius="100dp"
             android:text="Log out"/>
 
