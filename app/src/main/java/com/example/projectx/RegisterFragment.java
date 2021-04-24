@@ -1,5 +1,6 @@
 package com.example.projectx;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -11,12 +12,19 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
-public class RegisterFragment extends Fragment implements View.OnClickListener{
+//vanha
+//public class RegisterFragment extends Fragment implements View.OnClickListener{
+public class RegisterFragment extends Fragment {
 
     Button signUpButton;
     Spinner spinner;
-
+    private View paramView;
+    private Context context;
+    public void readAndWrite(Context context){
+        this.context=context;
+    }
 
 
 
@@ -36,8 +44,28 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
     }
 
 
-    @Override
-    public void onClick(View view) {
-        //TODO: implement login logic here
+    //@Override
+    public void register(View v) {
+        readAndWrite rw = new readAndWrite(this);
+        TextView tv_user = paramView.findViewById(R.id.et_username);
+        TextView tv_pass = paramView.findViewById(R.id.et_password);
+        TextView tv_height = paramView.findViewById(R.id.et_height);
+        double height = Double.valueOf(tv_height.getText().toString());
+        TextView tv_weight = paramView.findViewById(R.id.et_weight);
+        double weight = Double.valueOf(tv_weight.getText().toString());
+        TextView tv_age = paramView.findViewById(R.id.et_age);
+        int age = Integer.valueOf(tv_age.getText().toString());
+        TextView tv_sex = paramView.findViewById(R.id.et_sexSpinner);
+
+        if (rw.createNewUser(tv_user.getText().toString(),
+                tv_pass.getText().toString(),
+                height,
+                height,
+                age,
+                tv_sex.getText().toString()) == true) {
+            System.out.println("pääohjelmassa true, siirry kirjautumiseen");
+        } else {
+            System.out.println("Pääohjelmassa false, käyttäjää ei luotu, anna virheilmoitus");
+        }
     }
 }
