@@ -19,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -44,22 +45,7 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         paramView = inflater.inflate(R.layout.fragment_home, container, false);
-        insDate = (EditText) paramView.findViewById(R.id.textDate);
-        adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.product_name, products);
-        insDate.addTextChangedListener(new TextWatcher() {
-
-            public void afterTextChanged(Editable s) {
-
-            }
-
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                System.out.println("***************************" + s);
-            }
-        });
-
-
+        btnInsert = (Button) paramView.findViewById(R.id.btnInsertWeight);
 
         /**
          * Tässä blokissa määritellään kuvaaja sekä kuvaajien tyylit
@@ -150,5 +136,9 @@ public class HomeFragment extends Fragment {
         whoBmiVals.add(new Entry(4, 25));
 
         return whoBmiVals;
+    }
+
+    private void TestFunc(String date, int weight){
+        System.out.println("***PVM: " + date + " PAINO: " + weight);
     }
 }
