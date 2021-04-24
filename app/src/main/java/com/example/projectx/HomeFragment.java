@@ -1,6 +1,7 @@
 package com.example.projectx;
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -31,7 +34,7 @@ public class HomeFragment extends Fragment {
 
         /**
          * Tässä blokissa määritellään kuvaaja sekä kuvaajien tyylit
-        */
+         */
         mpLineChart = (LineChart) paramView.findViewById(R.id.chart);
         mpLineChart.getAxisLeft().setEnabled(false);
         mpLineChart.getAxisRight().setEnabled(false);
@@ -45,15 +48,23 @@ public class HomeFragment extends Fragment {
         // Oma BMI kuvaajan alustus, tyylit ja lisäys
         LineDataSet lineDataSet1 = new LineDataSet(userBmiValues(), "Oma BMI");
         lineDataSet1.setLineWidth(2);
-        lineDataSet1.setColor(Color.GREEN);
+        lineDataSet1.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
+        lineDataSet1.setDrawCircles(true);
+        lineDataSet1.setCircleColor(Color.BLACK);
+        lineDataSet1.setCircleHoleRadius(3f);
+        lineDataSet1.setColor(Color.MAGENTA);
         lineDataSet1.setDrawFilled(true);
+        lineDataSet1.setFillColor(Color.MAGENTA);
+        lineDataSet1.setFillAlpha(30);
         lineDataSet1.setValueTextSize(12f);
         dataSets.add(lineDataSet1);
 
         // Vertailu BMI kuvaajan alustus, tyylit ja lisäys
         LineDataSet lineDataSet2 = new LineDataSet(whoBmiConstant(), "Vertailu BMI");
         lineDataSet2.setColor(Color.RED);
-        lineDataSet2.setValueTextSize(12f);
+        lineDataSet2.setLineWidth(3f);
+        lineDataSet2.setDrawCircles(false);
+        lineDataSet2.setDrawValues(false);
         dataSets.add(lineDataSet2);
 
         //Kuvaajien luonti UI:lle
