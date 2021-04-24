@@ -100,6 +100,15 @@ public class HomeFragment extends Fragment {
                         double weightInput = Double.parseDouble(String.valueOf(weight.getText()));
                     }
                 });
+        date.setOnClickListener(
+                new View.OnClickListener()
+                {
+                    public void onClick(View view)
+                    {
+                        String testDate = date.getText().toString();
+                        System.out.println(testDate);
+                    }
+                });
 
         return paramView;
     }
