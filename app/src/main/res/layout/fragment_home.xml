@@ -10,58 +10,74 @@
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/chart"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="300dp"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="200dp"
-        android:layout_marginBottom="200dp"/>
+        android:layout_below="@+id/lastBmi"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="150dp"
+        android:layout_marginBottom="95dp" />
 
     <TextView
         android:id="@+id/bmiText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
+        android:textSize="25dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="75dp"
         android:textStyle="bold"
         android:text="Your BMI"/>
 
     <TextView
+        android:id="@+id/lastBmi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:textSize="15dp"
         android:layout_below="@id/bmiText"
-        android:hint="56,48 "/>
+        android:layout_centerHorizontal="true"
+        android:hint="56,48 "
+        android:textSize="20dp" />
 
-    <EditText
-        android:id="@+id/insertWeight"
+    <Button
+        android:id="@+id/btnInsertWeight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:hint="Insert weight" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="141dp"
+        android:layout_marginTop="209dp"
+        android:layout_marginEnd="140dp"
+        android:hint="Insert weight"
+        android:textColorHint="#FFFFFF" />
 
     <TextView
-        android:id="@+id/date"
+        android:id="@+id/textDate"
         android:layout_width="wrap_content"
-        android:textSize="20dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:hint="12/02/2021"/>
-
-
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="22dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="142dp"
+        android:layout_marginEnd="281dp"
+        android:hint="12/02/2021"
+        android:textSize="20dp" />
 
     <TextView
-        android:id="@+id/history"
+        android:id="@+id/textWeight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:layout_marginTop="150dp"
-        android:layout_alignParentRight="true"
-        android:hint="Last bmi:"/>
-
-
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="253dp"
+        android:layout_marginLeft="253dp"
+        android:layout_marginTop="143dp"
+        android:layout_marginEnd="50dp"
+        android:hint="100"
+        android:textSize="20dp" />
 
 
 </RelativeLayout>
