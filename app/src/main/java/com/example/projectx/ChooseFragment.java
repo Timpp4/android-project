@@ -29,6 +29,7 @@ public class ChooseFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
+        // Fragment navigation logic
         if (view.getId() == logInButton.getId()) {
             ((LoginSignUp) getActivity()).navigateToLogin();
         } else if (view.getId() == signUpButton.getId()) {

@@ -34,7 +34,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
         signUpButton = (Button) v.findViewById(R.id.btn_signup);
         signUpButton.setOnClickListener(this);
         Spinner spinner = v.findViewById(R.id.et_sexSpinner);
-
+        // Array of (gender) spinner items created
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.genders_array, android.R.layout.simple_spinner_item);
 

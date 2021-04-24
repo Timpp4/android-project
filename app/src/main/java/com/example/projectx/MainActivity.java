@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
+    // Create BottomNavigationBar and fragments to application menu
     private BottomNavigationView.OnNavigationItemSelectedListener bottomNavigationMethod = new
             BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
