@@ -43,12 +43,12 @@
         android:id="@+id/btn_sign"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/tv_subtitle"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="246dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/btn_login"
         android:background="@drawable/btn_custom"
-        android:textColor="@android:color/white"
-        android:text="Sign up"/>
+        android:text="Sign up"
+        android:textColor="@android:color/white" />
 
 </RelativeLayout>

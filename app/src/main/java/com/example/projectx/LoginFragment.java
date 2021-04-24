@@ -11,8 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import java.util.Objects;
-
 public class LoginFragment extends Fragment implements View.OnClickListener{
 
     Button loginButton;
@@ -22,7 +20,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_login, container, false);
-        loginButton = (Button) v.findViewById(R.id.btn_login);
+        loginButton = (Button) v.findViewById(R.id.btn_signup);
         loginButton.setOnClickListener(this);
         return v;
     }
