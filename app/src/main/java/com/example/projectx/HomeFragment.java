@@ -90,16 +90,8 @@ public class HomeFragment extends Fragment {
         mpLineChart.setData(data);
         mpLineChart.invalidate();
 
-        final FragmentManager fm = ((AppCompatActivity)getActivity()).getSupportFragmentManager();
 
-        date.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AppCompatDialogFragment dateFragment = new DatePickerFragment();
-                dateFragment.setTargetFragment(HomeFragment.this, 0);
-                dateFragment.show(fm, "datePicker");
-            }
-        });
+
         weight.setOnClickListener(
                 new View.OnClickListener()
                 {
@@ -108,19 +100,17 @@ public class HomeFragment extends Fragment {
                         double weightInput = Double.parseDouble(String.valueOf(weight.getText()));
                     }
                 });
+        date.setOnClickListener(
+                new View.OnClickListener()
+                {
+                    public void onClick(View view)
+                    {
+                        String testDate = date.getText().toString();
+                        System.out.println(testDate);
+                    }
+                });
 
         return paramView;
-    }
-
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // check for the results
-        if (requestCode == 0 && resultCode == Activity.RESULT_OK) {
-            // get date from string
-            selectedDate = data.getStringExtra("selectedDate");
-            // set the value of the editText
-            System.out.println("************* SELECTED DATE ********: " + selectedDate);
-            date.setText(selectedDate);
-        }
     }
 
     @NotNull
