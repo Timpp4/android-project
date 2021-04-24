@@ -10,9 +10,13 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -28,16 +32,34 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
 
-public class HomeFragment extends Fragment implements View.OnClickListener{
+public class HomeFragment extends Fragment {
 
     LineChart mpLineChart;
     private View paramView;
+    Button btnInsert;
+    EditText insDate;
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         paramView = inflater.inflate(R.layout.fragment_home, container, false);
+        insDate = (EditText) paramView.findViewById(R.id.textDate);
+        adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.product_name, products);
+        insDate.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {
+
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                System.out.println("***************************" + s);
+            }
+        });
+
+
 
         /**
          * Tässä blokissa määritellään kuvaaja sekä kuvaajien tyylit
@@ -82,7 +104,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         return paramView;
     }
 
-    @Override
+    /*@Override
     public void onClick(View v){
         EditText date = getView().findViewById(R.id.textDate);
         String insertDate = date.getText().toString();
@@ -91,7 +113,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         double insertWeight = Double.parseDouble(weight.getText().toString());
         System.out.println("**** PAINO: " +insertWeight);
 
-    }
+    }*/
 
     @NotNull
     private ArrayList<Entry> userBmiValues()
