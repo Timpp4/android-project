@@ -28,18 +28,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements View.OnClickListener{
 
     LineChart mpLineChart;
-    TextView date;
-    EditText weight;
-    String selectedDate;
     private View paramView;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
@@ -51,9 +43,6 @@ public class HomeFragment extends Fragment {
          * Tässä blokissa määritellään kuvaaja sekä kuvaajien tyylit
          */
         mpLineChart = (LineChart) paramView.findViewById(R.id.chart);
-        date = (TextView) paramView.findViewById(R.id.textDate);
-        weight = (EditText) paramView.findViewById(R.id.textWeight);
-
         mpLineChart.getAxisLeft().setEnabled(false);
         mpLineChart.getAxisRight().setEnabled(false);
         mpLineChart.getDescription().setEnabled(false);
@@ -90,27 +79,18 @@ public class HomeFragment extends Fragment {
         mpLineChart.setData(data);
         mpLineChart.invalidate();
 
-
-
-        weight.setOnClickListener(
-                new View.OnClickListener()
-                {
-                    public void onClick(View view)
-                    {
-                        double weightInput = Double.parseDouble(String.valueOf(weight.getText()));
-                    }
-                });
-        date.setOnClickListener(
-                new View.OnClickListener()
-                {
-                    public void onClick(View view)
-                    {
-                        String testDate = date.getText().toString();
-                        System.out.println(testDate);
-                    }
-                });
-
         return paramView;
+    }
+
+    @Override
+    public void onClick(View v){
+        EditText date = getView().findViewById(R.id.textDate);
+        String insertDate = date.getText().toString();
+        System.out.println("**** PÄIVÄMÄÄRÄ: " +insertDate);
+        EditText weight = getView().findViewById(R.id.textWeight);
+        double insertWeight = Double.parseDouble(weight.getText().toString());
+        System.out.println("**** PAINO: " +insertWeight);
+
     }
 
     @NotNull
