@@ -1,12 +1,20 @@
 package com.example.projectx;
 
+import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.LimitLine;
@@ -20,22 +28,27 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 
 public class HomeFragment extends Fragment {
 
     LineChart mpLineChart;
+    TextView date;
     private View paramView;
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         paramView = inflater.inflate(R.layout.fragment_home, container, false);
 
         /**
          * Tässä blokissa määritellään kuvaaja sekä kuvaajien tyylit
          */
         mpLineChart = (LineChart) paramView.findViewById(R.id.chart);
+        date = (TextView) paramView.findViewById(R.id.date);
+
         mpLineChart.getAxisLeft().setEnabled(false);
         mpLineChart.getAxisRight().setEnabled(false);
         mpLineChart.getDescription().setEnabled(false);
@@ -110,4 +123,10 @@ public class HomeFragment extends Fragment {
 
         return whoBmiVals;
     }
+
+    @SuppressLint("SetTextI18n")
+    public void timePicker(View v) {
+
+    }
+
 }
