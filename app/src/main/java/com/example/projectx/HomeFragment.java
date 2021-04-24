@@ -3,6 +3,7 @@ package com.example.projectx;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.icu.util.TimeZone;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,19 +34,20 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements View.OnClickListener {
 
     LineChart mpLineChart;
     private View paramView;
-    Button btnInsert;
-    EditText insDate;
+    public Button insert;
+
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         paramView = inflater.inflate(R.layout.fragment_home, container, false);
-        btnInsert = (Button) paramView.findViewById(R.id.btnInsertWeight);
+        insert = (Button) paramView.findViewById(R.id.btnInsertWeight);
+        insert.setOnClickListener(this);
 
         /**
          * Tässä blokissa määritellään kuvaaja sekä kuvaajien tyylit
@@ -90,17 +92,6 @@ public class HomeFragment extends Fragment {
         return paramView;
     }
 
-    /*@Override
-    public void onClick(View v){
-        EditText date = getView().findViewById(R.id.textDate);
-        String insertDate = date.getText().toString();
-        System.out.println("**** PÄIVÄMÄÄRÄ: " +insertDate);
-        EditText weight = getView().findViewById(R.id.textWeight);
-        double insertWeight = Double.parseDouble(weight.getText().toString());
-        System.out.println("**** PAINO: " +insertWeight);
-
-    }*/
-
     @NotNull
     private ArrayList<Entry> userBmiValues()
     /**
@@ -140,5 +131,31 @@ public class HomeFragment extends Fragment {
 
     private void TestFunc(String date, int weight){
         System.out.println("***PVM: " + date + " PAINO: " + weight);
+    }
+    @Override
+    public void onClick(View view) {
+        double weight = -1;
+        EditText insDate = getView().findViewById(R.id.textDate);
+        String date = insDate.getText().toString();
+        DateValidation dv = new DateValidation();
+        System.out.println(dv.DateValidation(date));
+        System.out.println(date);
+        EditText insWeight = getView().findViewById(R.id.textWeight);
+        String weightTest = insWeight.getText().toString();
+        if (weightTest.equals("") || weightTest.isEmpty()){
+            weightTest = "-1";
+        }else {
+            weight = Double.parseDouble(weightTest);
+        }
+        System.out.println(weight);
+        if (dv.DateValidation(date) && 0 < weight && weight < 350){
+            //TODO: Lisää lokiin
+        }
+        else if (!dv.DateValidation(date)) {
+            Toast.makeText(getActivity().getBaseContext(), "Date isn't valid", Toast.LENGTH_LONG).show();
+        }
+        else if (weight < 0 || 300 < weight) {
+            Toast.makeText(getActivity().getBaseContext(), "Weight isn't valid", Toast.LENGTH_LONG).show();
+        }
     }
 }
