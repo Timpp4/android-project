@@ -20,16 +20,19 @@
         android:id="@+id/bmiText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="20dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
+        android:textStyle="bold"
         android:text="Your BMI"/>
 
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:textSize="15dp"
         android:layout_below="@id/bmiText"
-        android:hint="bmi: 12315345"/>
+        android:hint="56,48 "/>
 
     <EditText
         android:id="@+id/insertWeight"
@@ -38,27 +41,25 @@
         android:layout_marginTop="50dp"
         android:hint="Insert weight"/>
 
-    <EditText
+    <TextView
         android:id="@+id/date"
         android:layout_width="wrap_content"
+        android:textSize="20dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
         android:layout_alignParentLeft="true"
         android:hint="12/02/2021"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Last bmi date"
-        android:layout_above="@id/date"/>
 
-    <EditText
+
+    <TextView
         android:id="@+id/history"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="20dp"
         android:layout_marginTop="150dp"
         android:layout_alignParentRight="true"
-        android:hint="Last bmi..."/>
+        android:hint="Last bmi:"/>
 
 
 
