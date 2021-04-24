@@ -35,6 +35,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
             startActivity(MainIntent);
 
         }
-            //((LoginSignUp) getActivity()).MainActivity();
+        //((LoginSignUp) getActivity()).MainActivity();
     }
 }

@@ -53,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
                             break;
 
                         case R.id.info:
-                             fragment = new InfoFragment();
-                             break;
+                            fragment = new InfoFragment();
+                            break;
 
                         case R.id.profile:
                             fragment = new ProfileFragment();
