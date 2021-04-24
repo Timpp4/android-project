@@ -63,7 +63,7 @@ public class InfoFragment extends Fragment {
     }
 
     public void whoRequest(){
-        bmiBackend bb = new bmiBackend();
+        BmiBackend bb = new BmiBackend();
         bb.whoRequest();
     }
 }

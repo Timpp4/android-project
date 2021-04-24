@@ -37,15 +37,14 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
     LineChart mpLineChart;
-    private View paramView;
-    public Button insert;
+    Button insert;
 
 
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        paramView = inflater.inflate(R.layout.fragment_home, container, false);
+        View paramView = inflater.inflate(R.layout.fragment_home, container, false);
         insert = (Button) paramView.findViewById(R.id.btnInsertWeight);
         insert.setOnClickListener(this);
 
@@ -129,9 +128,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         return whoBmiVals;
     }
 
-    private void TestFunc(String date, int weight){
-        System.out.println("***PVM: " + date + " PAINO: " + weight);
-    }
     @Override
     public void onClick(View view) {
         double weight = -1;
@@ -152,10 +148,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             //TODO: Lisää lokiin
         }
         else if (!dv.DateValidation(date)) {
-            Toast.makeText(getActivity().getBaseContext(), "Date isn't valid", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity().getBaseContext(), "Date isn't valid",
+                    Toast.LENGTH_LONG).show();
         }
         else if (weight < 0 || 300 < weight) {
-            Toast.makeText(getActivity().getBaseContext(), "Weight isn't valid", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity().getBaseContext(), "Weight isn't valid",
+                    Toast.LENGTH_LONG).show();
         }
     }
 }
