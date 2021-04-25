@@ -48,10 +48,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        final String YEAR = "2016";
         View paramView = inflater.inflate(R.layout.fragment_home, container, false);
-        final String[] avgBmi = {""};
-
 
         /**
          * Tässä blokissa määritellään kuvaaja sekä kuvaajien tyylit
@@ -63,17 +60,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         mpLineChart.getXAxis().setDrawGridLines(false);
         mpLineChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
 
-        //Initializing the list for graphs
-        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+
 
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        BmiBackend bb = new BmiBackend();
         CountriesAPI ca = new CountriesAPI();
 
         insert = (Button) paramView.findViewById(R.id.btnInsertWeight);
         insert.setOnClickListener(this);
+        System.out.println("****** NAPIN PAINALLUS : " + insert.isPressed());
 
         Spinner spinner = paramView.findViewById(R.id.countrySpinner);
         ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(getActivity(),
@@ -83,43 +79,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                dataSets.clear();
                 mpLineChart.invalidate();
                 mpLineChart.clear();
+                ArrayList<ILineDataSet> dataSets = new ArrayList<>();
                 String country = ca.countryList().get(position);
-                bb.whoRequest(ca.countriesRequest(country));
-                readAndWrite rw = new readAndWrite(getContext());
-                //TODO: Vaihda sex ja vuosi muuttujien mukaan
-                if(bb.getBmiFromWho ("Male", YEAR) == null){
-                    avgBmi[0] = bb.getBmiFromWho("Both sexes", YEAR);
-                }else{
-                    //TODO: Lisää sukupuoli muuttuja profiililta
-                    avgBmi[0] = bb.getBmiFromWho("Male", YEAR);
-                }
-                // Initializing BMI graphs and styles
-                LineDataSet lineDataSet1 = new LineDataSet(userBmiValues(rw.readUserData
-                        (), rw.profileInfo()), "Oma BMI");
-                lineDataSet1.setLineWidth(2);
-                lineDataSet1.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
-                lineDataSet1.setDrawCircles(true);
-                lineDataSet1.setCircleColor(Color.BLACK);
-                lineDataSet1.setCircleHoleRadius(3f);
-                lineDataSet1.setColor(Color.MAGENTA);
-                lineDataSet1.setDrawFilled(true);
-                lineDataSet1.setFillColor(Color.MAGENTA);
-                lineDataSet1.setFillAlpha(30);
-                lineDataSet1.setValueTextSize(12f);
-                dataSets.add(lineDataSet1);
-
-                // Initializing Comparison graph and styles
-                LineDataSet lineDataSet2 = new LineDataSet(whoBmiConstant(rw.readUserData().size(), avgBmi), "Vertailu BMI");
-                lineDataSet2.setColor(Color.RED);
-                lineDataSet2.setLineWidth(3f);
-                lineDataSet2.setDrawCircles(false);
-                lineDataSet2.setDrawValues(true);
-                lineDataSet2.setValueTextSize(12f);
-                dataSets.add(lineDataSet2);
-
+                dataSets = userChartRefresh();
+                dataSets.add(constantChartRefresh(country));
                 //Creating graphs to UI
                 LineData data = new LineData(dataSets);
                 mpLineChart.setData(data);
@@ -131,7 +96,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
             }
         });
-
+        String test = spinner.getSelectedItem().toString();
+        System.out.println("************************ TÄMÄ ON userChartRefresh **************" +test);
         return paramView;
     }
 
@@ -150,6 +116,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
         return userBmiVals;
     }
+    @NotNull
+    private ArrayList<Entry> userWeight(ArrayList<DataObject> dataObject)
+    /**
+     * Tässä aliohjelmassa luetaan käyttän painodata ja muunnetaan BMI:ksi BMI luokan avulla
+     */
+    {
+        ArrayList<Entry> userBmiVals = new ArrayList<Entry>();
+        for (int i = 0; i < dataObject.size(); i++){
+            userBmiVals.add(new Entry(i, (float) (dataObject.get(i).getWeight())));
+        }
+        return userBmiVals;
+    }
 
     //Run dates from userdata and search country-specific average BMI from WHO API
     @NotNull
@@ -159,16 +137,89 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
      * vuoden ja sukupuolen mukaan haettu maakohtainen keskibmi
      */
     {
-        //TODO: Lisää profiililta paino ja päivänmäärä data tähän.
         ArrayList<Entry> whoBmiVals = new ArrayList<Entry>();
         for (int i = 0; i < size; i++){
             whoBmiVals.add(new Entry(i, Float.parseFloat(avgBmi[0])));
         }
         return whoBmiVals;
     }
+    public ArrayList<ILineDataSet> userChartRefresh(){
+
+        BmiBackend bb = new BmiBackend();
+
+
+        //Initializing the list for graphs
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+        dataSets.clear();
+        readAndWrite rw = new readAndWrite(getContext());
+
+        // Initializing BMI graphs and styles
+        LineDataSet lineDataSet1 = new LineDataSet(userBmiValues(rw.readUserData
+                (), rw.profileInfo()), "Oma BMI");
+        lineDataSet1.setLineWidth(2);
+        lineDataSet1.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
+        lineDataSet1.setDrawCircles(true);
+        lineDataSet1.setCircleColor(Color.BLACK);
+        lineDataSet1.setCircleHoleRadius(3f);
+        lineDataSet1.setColor(Color.MAGENTA);
+        lineDataSet1.setDrawFilled(true);
+        lineDataSet1.setFillColor(Color.MAGENTA);
+        lineDataSet1.setFillAlpha(30);
+        lineDataSet1.setValueTextSize(12f);
+        lineDataSet1.setValueTextColor(Color.GRAY);
+        dataSets.add(lineDataSet1);
+
+        LineDataSet lineDataSet3 = new LineDataSet(userWeight(rw.readUserData()), "Paino");
+        lineDataSet3.setColor(Color.GREEN);
+        lineDataSet3.setLineWidth(3f);
+        lineDataSet1.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
+        lineDataSet3.setDrawCircles(false);
+        lineDataSet3.setDrawValues(true);
+        lineDataSet3.setValueTextSize(12f);
+        lineDataSet3.setValueTextColor(Color.GRAY);
+        dataSets.add(lineDataSet3);
+
+        return dataSets;
+
+    }
+
+    public LineDataSet constantChartRefresh(String country){
+        final String YEAR = "2016";
+        CountriesAPI ca = new CountriesAPI();
+        BmiBackend bb = new BmiBackend();
+        readAndWrite rw = new readAndWrite(getContext());
+        if(bb.whoRequest(ca.countriesRequest(country))){
+            bb.whoRequest(ca.countriesRequest(country));
+        }
+        else{
+            bb.whoRequest(ca.countriesRequest("FIN"));
+        }
+        // Initializing Comparison graph and styles
+        //TODO: Vaihda sex ja vuosi muuttujien mukaan
+        final String[] avgBmi = {""};
+        if(rw.profileInfo().get(4).equals("Other")){
+            avgBmi[0] = bb.getBmiFromWho("Both sexes", YEAR);
+        }
+        else if (rw.profileInfo().get(4).equals("Female")){
+            avgBmi[0] = bb.getBmiFromWho("Female", YEAR);
+        }
+        else{
+            //TODO: Lisää sukupuoli muuttuja profiililta
+            avgBmi[0] = bb.getBmiFromWho("Male", YEAR);
+        }
+        LineDataSet lineDataSet2 = new LineDataSet(whoBmiConstant(rw.readUserData().size(), avgBmi), "Vertailu BMI");
+        lineDataSet2.setColor(Color.RED);
+        lineDataSet2.setLineWidth(5f);
+        lineDataSet2.setDrawCircles(false);
+        lineDataSet2.setDrawValues(true);
+        lineDataSet2.setValueTextSize(12f);
+        lineDataSet2.setValueTextColor(Color.GRAY);
+        return lineDataSet2;
+    }
 
     @Override
     public void onClick(View view) {
+
         EditText test = null;
         NumberValidation nv = new NumberValidation(test);
         DateValidation dv = new DateValidation();
@@ -185,6 +236,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             userBmiValues(rw.readUserData(), rw.profileInfo());
             rw.insertWeight(date, weight);
             rw.readUserData();
+            ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+            dataSets = userChartRefresh();
+            LineData data = new LineData(dataSets);
+            mpLineChart.setData(data);
+            mpLineChart.invalidate();
+            Toast.makeText(Objects.requireNonNull(getActivity()).getBaseContext(),
+                    "Choose country to compare average BMI!",
+                    Toast.LENGTH_LONG).show();
         }
         else if (!dv.DateValidation(date)) {
             insDate.setError("Date isn't valid");
