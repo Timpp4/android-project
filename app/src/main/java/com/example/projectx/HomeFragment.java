@@ -11,14 +11,17 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.os.StrictMode;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,10 +47,41 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy
+                .Builder()
+                .permitAll()
+                .build();
+        StrictMode.setThreadPolicy(policy);
+        BmiBackend bb = new BmiBackend();
+        CountriesAPI ca = new CountriesAPI();
+        bb.whoRequest();
+        System.out.println("********" + bb.getBmiFromWho("Male", "2016"));
         View paramView = inflater.inflate(R.layout.fragment_home, container, false);
         insert = (Button) paramView.findViewById(R.id.btnInsertWeight);
         insert.setOnClickListener(this);
+
+        Spinner spinner = paramView.findViewById(R.id.countrySpinner);
+        ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_spinner_item, ca.countryList());
+        countryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(countryAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                System.out.println("Parent: " +parent+ " position: " +position+ " id: "+id);
+                String country = ca.countryList().get(position);
+                ca.countriesRequest(country);
+                System.out.println("**************************VALITTU MAA: " +country);
+                //ca.countriesRequest(country);
+                //stuff here to handle item selection
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
 
         /**
          * Tässä blokissa määritellään kuvaaja sekä kuvaajien tyylit
@@ -131,21 +165,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        double weight = -1;
+        EditText test = null;
+        NumberValidation nv = new NumberValidation(test);
+        DateValidation dv = new DateValidation();
         EditText insDate = getView().findViewById(R.id.textDate);
         String date = insDate.getText().toString();
-        DateValidation dv = new DateValidation();
         System.out.println(dv.DateValidation(date));
         System.out.println(date);
         EditText insWeight = getView().findViewById(R.id.textWeight);
-        String weightTest = insWeight.getText().toString();
-        if (weightTest.equals("") || weightTest.isEmpty()){
-            weightTest = "-1";
-        }else {
-            weight = Double.parseDouble(weightTest);
-        }
+        double weight = nv.doubleValidation(insWeight);
         System.out.println(weight);
         if (dv.DateValidation(date) && 0 < weight && weight < 600){
+            //Toast.makeText(Objects.requireNonNull(getActivity()).getBaseContext(), bb., Toast.LENGTH_LONG).show();
             //TODO: Lisää lokiin
         }
         else if (!dv.DateValidation(date)) {
