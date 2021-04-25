@@ -32,6 +32,7 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
@@ -144,16 +145,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             weight = Double.parseDouble(weightTest);
         }
         System.out.println(weight);
-        if (dv.DateValidation(date) && 0 < weight && weight < 350){
+        if (dv.DateValidation(date) && 0 < weight && weight < 600){
             //TODO: Lisää lokiin
         }
         else if (!dv.DateValidation(date)) {
-            Toast.makeText(getActivity().getBaseContext(), "Date isn't valid",
-                    Toast.LENGTH_LONG).show();
+            insDate.setError("Date isn't valid");
         }
-        else if (weight < 0 || 300 < weight) {
-            Toast.makeText(getActivity().getBaseContext(), "Weight isn't valid",
-                    Toast.LENGTH_LONG).show();
+        else if (weight < 0 || 600 < weight) {
+            insWeight.setError("Weight must be between 0 and 600!");
         }
     }
 }

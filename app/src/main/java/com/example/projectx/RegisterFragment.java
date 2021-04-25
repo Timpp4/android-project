@@ -1,7 +1,5 @@
 package com.example.projectx;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -14,7 +12,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 //vanha
 public class RegisterFragment extends Fragment implements View.OnClickListener{
@@ -47,7 +44,10 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
 
+        EditText test = null;
+
         readAndWrite rw = new readAndWrite(getContext());
+        NumberValidation nv = new NumberValidation(test);
 
         EditText tv_user = getView().findViewById(R.id.et_username);
         System.out.println(tv_user.getText().toString());
@@ -57,17 +57,18 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
 
         EditText tv_height = getView().findViewById(R.id.et_height);
         System.out.println(tv_height.getText().toString());
-        double height =  Double.parseDouble(tv_height.getText().toString());
+        double height = nv.doubleValidation(tv_height);
         System.out.println(height);
 
         EditText tv_weight = getView().findViewById(R.id.et_weight);
         System.out.println(tv_weight.getText().toString());
-        double weight = Double.valueOf(tv_weight.getText().toString());
+        //double weight = Double.valueOf(tv_weight.getText().toString());
+        double weight = nv.doubleValidation(tv_weight);
         System.out.println(weight);
 
         EditText tv_age = getView().findViewById(R.id.et_age);
         System.out.println(tv_weight.getText().toString());
-        int age = Integer.valueOf(tv_age.getText().toString());
+        int age = nv.integerValidation(tv_age);
         System.out.println(age);
 
         Spinner tv_sex = (Spinner) getView().findViewById(R.id.et_sexSpinner);
@@ -87,8 +88,23 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
 
             }
 
-
-        } else {
+        }
+        else if (tv_user.getText().toString().trim().length() == 0){
+            tv_user.setError("Invalid username!");
+        }
+        else if (tv_pass.getText().toString() == null || tv_pass.getText().toString().length() < 12) {
+            tv_pass.setError("Password must be at least 12 characters!");
+        }
+        else if (height < 0 || 300 < height) {
+            tv_height.setError("Height must be between 0 and 300!");
+        }
+        else if (weight < 0 || 600 < weight) {
+            tv_weight.setError("Weight must be between 0 and 600!");
+        }
+        else if (age < 1900 || 2022 < age) {
+            tv_age.setError("Year of born must be between 1900 and 2022!");
+        }
+        else {
             System.out.println("Pääohjelmassa false, käyttäjää ei luotu, anna virheilmoitus");
         }
     }

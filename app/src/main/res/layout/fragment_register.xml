@@ -82,14 +82,14 @@
         android:id="@+id/et_age"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:hint="Age i.e 1997"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
-        android:padding="15dp"
-        android:inputType="number"
         android:layout_below="@id/et_weight"
         android:layout_centerInParent="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:hint="Year of born i.e 1997"
+        android:inputType="number"
+        android:padding="15dp"
         android:textSize="15sp" />
 
     <Spinner

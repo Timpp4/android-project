@@ -91,6 +91,9 @@ public class readAndWrite {
 
     // Save newly created username and password for login
     public boolean writeFile(String username, String password) {
+        if (username.trim().length() == 0 || password.length() < 12){
+            return false;
+        }
         //if (checkIfUserExist(username) == true) {
         //    System.out.println("checkifuserexist returned true, dont continue");
         //    return false;
@@ -111,6 +114,10 @@ public class readAndWrite {
     }
 
     public boolean createNewUser(String username, String password, Double height, Double weight, Integer yearBorn, String sex) {
+        if (height < 0 || weight < 0 || yearBorn < 0){
+            System.out.println("Tiedot epätäydellisiä");
+            return false;
+        }
         // Save username and password to a separate file for login
         if (writeFile(username, password) == false) {
             System.out.println("ei voitu kirjoitella kyättistä ja salasanaa, exit and forget");

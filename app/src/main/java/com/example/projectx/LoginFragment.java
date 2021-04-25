@@ -48,6 +48,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
 
             }
 
+        }else {
+            tv_pass.setError("Username or password did not match!");
         }
 
     }
