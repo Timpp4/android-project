@@ -23,4 +23,13 @@ public class BmiObject {
 	public String getYear() {
 		return year;
 	}
+
+	@Override
+	public String toString() {
+		return "BmiObject{" +
+				"year='" + year + '\'' +
+				", bmi='" + bmi + '\'' +
+				", sex='" + sex + '\'' +
+				'}';
+	}
 }
