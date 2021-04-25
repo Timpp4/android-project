@@ -1,5 +1,6 @@
 package com.example.projectx.fragments;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -14,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.projectx.backend.BmiCalculator;
@@ -49,7 +51,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
 
         View paramView = inflater.inflate(R.layout.fragment_home, container, false);
-
+        testi (paramView);
         /**
          * Tässä blokissa määritellään kuvaaja sekä kuvaajien tyylit
          */
@@ -107,7 +109,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
      * Tässä aliohjelmassa luetaan käyttän painodata ja muunnetaan BMI:ksi BMI luokan avulla
      */
     {
-        //TODO: Lisää profiililta paino ja päivänmäärä data tähän. (x=bmi, y= pvm)
         BmiCalculator bc = new BmiCalculator();
         ArrayList<Entry> userBmiVals = new ArrayList<Entry>();
         for (int i = 0; i < dataObject.size(); i++){
@@ -195,7 +196,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             bb.whoRequest(ca.countriesRequest("FIN"));
         }
         // Initializing Comparison graph and styles
-        //TODO: Vaihda sex ja vuosi muuttujien mukaan
         final String[] avgBmi = {""};
         if(rw.profileInfo().get(4).equals("Other")){
             avgBmi[0] = bb.getBmiFromWho("Both sexes", YEAR);
@@ -204,7 +204,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             avgBmi[0] = bb.getBmiFromWho("Female", YEAR);
         }
         else{
-            //TODO: Lisää sukupuoli muuttuja profiililta
             avgBmi[0] = bb.getBmiFromWho("Male", YEAR);
         }
         LineDataSet lineDataSet2 = new LineDataSet(whoBmiConstant(rw.readUserData().size(), avgBmi), "Vertailu BMI");
@@ -251,5 +250,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         else if (weight < 0 || 600 < weight) {
             insWeight.setError("Weight must be between 0 and 600!");
         }
+    }
+    @SuppressLint("SetTextI18n")
+    public void testi(View view) {
+        //TODO: Lisää viimeisin arvo TextViewiin
+        TextView tv = (TextView) view.findViewById(R.id.lastBmi);
+        tv.setText("text");
     }
 }
