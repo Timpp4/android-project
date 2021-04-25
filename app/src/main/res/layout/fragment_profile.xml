@@ -191,13 +191,19 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_logOut"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:text="Log out"
             app:backgroundTint="@color/purple_200"
             app:cornerRadius="100dp" />
 
-
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_update"
+            android:layout_width="311dp"
+            android:layout_height="match_parent"
+            android:text="Update"
+            app:backgroundTint="@color/purple_200"
+            app:cornerRadius="100dp" />
 
     </LinearLayout>
 

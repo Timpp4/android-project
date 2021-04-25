@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.projectx.backend.BmiCalculator;
 import com.example.projectx.backend.DataObject;
@@ -24,9 +25,7 @@ import com.example.projectx.backend.NumberValidation;
 import com.example.projectx.R;
 import com.example.projectx.interfaces.BmiBackend;
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -35,6 +34,8 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
@@ -66,10 +67,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();
 
 
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy
-                .Builder()
-                .permitAll()
-                .build();
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         BmiBackend bb = new BmiBackend();
         CountriesAPI ca = new CountriesAPI();
@@ -100,7 +98,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 }
                 // Initializing BMI graphs and styles
                 LineDataSet lineDataSet1 = new LineDataSet(userBmiValues(rw.readUserData
-                        ()), "Oma BMI");
+                        (), rw.profileInfo()), "Oma BMI");
                 lineDataSet1.setLineWidth(2);
                 lineDataSet1.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
                 lineDataSet1.setDrawCircles(true);
@@ -118,7 +116,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 lineDataSet2.setColor(Color.RED);
                 lineDataSet2.setLineWidth(3f);
                 lineDataSet2.setDrawCircles(false);
-                lineDataSet2.setDrawValues(false);
+                lineDataSet2.setDrawValues(true);
+                lineDataSet2.setValueTextSize(12f);
                 dataSets.add(lineDataSet2);
 
                 //Creating graphs to UI
@@ -137,24 +136,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     @NotNull
-    private ArrayList<Entry> userBmiValues(ArrayList<DataObject> dataObject)
+    private ArrayList<Entry> userBmiValues(ArrayList<DataObject> dataObject, List<String> strings)
     /**
      * Tässä aliohjelmassa luetaan käyttän painodata ja muunnetaan BMI:ksi BMI luokan avulla
      */
     {
-        BmiCalculator bc = new BmiCalculator();
         //TODO: Lisää profiililta paino ja päivänmäärä data tähän. (x=bmi, y= pvm)
+        BmiCalculator bc = new BmiCalculator();
         ArrayList<Entry> userBmiVals = new ArrayList<Entry>();
         for (int i = 0; i < dataObject.size(); i++){
-            //userBmiVals.add(new Entry(i, bc.calculateBmi((float) dataObject.get(i).getWeight())));
+            userBmiVals.add(new Entry(i, (float) bc.calculateBmi(dataObject.get(i).getWeight(),
+                    Double.parseDouble(strings.get(1)))));
         }
-
-        /*userBmiVals.add(new Entry(0, 20));
-        userBmiVals.add(new Entry(1, 24));
-        userBmiVals.add(new Entry(2, 5));
-        userBmiVals.add(new Entry(3, 10));
-        userBmiVals.add(new Entry(4, 25));*/
-
         return userBmiVals;
     }
 
@@ -171,15 +164,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         for (int i = 0; i < size; i++){
             whoBmiVals.add(new Entry(i, Float.parseFloat(avgBmi[0])));
         }
-
-
-        //TODO: for-looppi, jolla lisätään pvmt x ja whoAPI tieto vakiona y
-        /*whoBmiVals.add(new Entry(0, 25));
-        whoBmiVals.add(new Entry(1, 25));
-        whoBmiVals.add(new Entry(2, 25));
-        whoBmiVals.add(new Entry(3, 25));
-        whoBmiVals.add(new Entry(4, 25));*/
-
         return whoBmiVals;
     }
 
@@ -189,6 +173,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         NumberValidation nv = new NumberValidation(test);
         DateValidation dv = new DateValidation();
         readAndWrite rw = new readAndWrite(getContext());
+        BmiCalculator bv = new BmiCalculator();
         EditText insDate = getView().findViewById(R.id.textDate);
         String date = insDate.getText().toString();
         System.out.println(dv.DateValidation(date));
@@ -197,12 +182,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         double weight = nv.doubleValidation(insWeight);
         System.out.println(weight);
         if (dv.DateValidation(date) && 0 < weight && weight < 600){
-            userBmiValues(rw.readUserData());
-            //Toast.makeText(Objects.requireNonNull(getActivity()).getBaseContext(), bb., Toast.LENGTH_LONG).show();
+            userBmiValues(rw.readUserData(), rw.profileInfo());
             rw.insertWeight(date, weight);
-            System.out.println("******** TESTI ********");
             rw.readUserData();
-
         }
         else if (!dv.DateValidation(date)) {
             insDate.setError("Date isn't valid");
