@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.os.Environment;
 import android.view.LayoutInflater;
@@ -32,9 +33,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
         logOutButton = (Button) v.findViewById(R.id.btn_logOut);
         logOutButton.setOnClickListener(this);
-
-
-
 
         return v;
     }

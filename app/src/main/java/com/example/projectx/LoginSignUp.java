@@ -51,7 +51,7 @@ public class LoginSignUp extends AppCompatActivity {
         hideAllVisibleFragment(ft);
 
         if (!loginFragment.isAdded()){
-            ft.add(R.id.a_login_content, loginFragment, loginFragment.getClass().getName());
+            ft.replace(R.id.a_login_content, loginFragment, loginFragment.getClass().getName());
         }else{
             ft.show(loginFragment);
         }
@@ -65,7 +65,7 @@ public class LoginSignUp extends AppCompatActivity {
         hideAllVisibleFragment(ft);
 
         if (!loginFragment.isAdded()){
-            ft.add(R.id.a_login_content, registerFragment, registerFragment.getClass().getName());
+            ft.replace(R.id.a_login_content, registerFragment, registerFragment.getClass().getName());
         }else{
             ft.show(registerFragment);
         }
