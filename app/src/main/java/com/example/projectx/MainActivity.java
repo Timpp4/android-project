@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     private BottomNavigationView bottomNavigationView;
-    Context context = this.getApplicationContext();
 
 
 

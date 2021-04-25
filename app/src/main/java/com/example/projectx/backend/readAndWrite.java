@@ -9,8 +9,10 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 public class readAndWrite {
 
@@ -218,7 +220,8 @@ public class readAndWrite {
 
     }
 
-    public void profileInfo(TextView user, TextView height, TextView weight, TextView yearBorn, TextView sex) {
+    public List<String> profileInfo() {
+        List<String> infoList = new ArrayList<String>();
         try {
             File path = context.getExternalFilesDir(null);
             File file_tmp = new File(path, "tmp.txt");
@@ -247,21 +250,20 @@ public class readAndWrite {
                 String[] row_parsed;
                 row_parsed = row.split(";");
                 if (i == 1) {
-                    user.setText(username);
-                    height.setText(row_parsed[1]);
-                    yearBorn.setText(row_parsed[3]);
-                    sex.setText(row_parsed[4]);
+                    infoList.add(row_parsed[0]);
+                    infoList.add(row_parsed[1]);
+                    infoList.add(row_parsed[3]);
+                    infoList.add(row_parsed[4]);
                 }
                 else if (i == arrayLength-1) {
-                    weight.setText(row_parsed[1]);
+                    infoList.add(row_parsed[1]);
                 }
                 i++;
             }
-
         } catch (Exception e) {
             System.out.println("profiili error " + e);
         }
-
+        return infoList;
     }
 
 
