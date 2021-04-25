@@ -8,6 +8,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 
 public class readAndWrite {
@@ -152,7 +153,6 @@ public class readAndWrite {
         return true;
     }
     public ArrayList<DataObject> readUserData(String username) {
-        System.out.println("******** TESTI 1********");
 
         ArrayList<DataObject> dataObject = new ArrayList<DataObject>();
         try {
@@ -180,7 +180,6 @@ public class readAndWrite {
                             .parse(user_parsed[0]);
                     double weight = Double.parseDouble(user_parsed[1]);
                     dataObject.add(new DataObject(date, weight));
-                    System.out.println("****DATAOBJECT: " + dataObject.get(i));
                 }
                 i++;
             }
@@ -188,6 +187,9 @@ public class readAndWrite {
             System.out.println("******** TESTI 666********");
             System.out.println(e);
         }
+        System.out.println("****DATAOBJECT SIZE: " + dataObject.size());
+        Collections.sort(dataObject);
+
         return dataObject;
     }
 
@@ -214,9 +216,6 @@ public class readAndWrite {
         }
 
     }
-
-
-
 
 
 
