@@ -27,7 +27,7 @@ import javax.xml.parsers.ParserConfigurationException;
 public class BmiBackend {
     ArrayList<BmiObject> bmiData = new ArrayList<BmiObject>();
 
-    public void whoRequest (String country) {
+    public boolean whoRequest (String country) {
         try {
             String requestUrl = "https://apps.who.int/gho/athena/api/GHO/NCD_BMI_MEAN.xml?filter=COUNTRY"+country+"&profile=simple";
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -40,7 +40,9 @@ public class BmiBackend {
             doc.getDocumentElement().normalize();
             //System.out.println("ROOT ELEMENT: " + doc.getDocumentElement().getNodeName());
             NodeList nList = doc.getDocumentElement().getElementsByTagName("Fact");
-
+            if (nList.getLength() == 0){
+                return false;
+            }
             for (int i = 0; i < nList.getLength(); i++) {
 
                 Node node = nList.item(i);
@@ -52,12 +54,12 @@ public class BmiBackend {
                     String sex = element.getElementsByTagName("SEX").item(0).getTextContent();
                     bmiData.add(new BmiObject(year, bmi, sex));
                 }
-
             }
-
         } catch (ParserConfigurationException | IOException | SAXException e) {
+            System.out.println("************* ERROR   : ");
             e.printStackTrace();
         }
+            return true;
     }
     public String getBmiFromWho(String sex, String year){
         String avgBmiByYear = null;

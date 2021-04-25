@@ -156,7 +156,7 @@ public class readAndWrite {
         return true;
     }
     public ArrayList<DataObject> readUserData() {
-
+        //TODO: Vaihda username
         String username = "juho";
         ArrayList<DataObject> dataObject = new ArrayList<DataObject>();
         try {

@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.projectx.LoginSignUp;
-import com.example.projectx.PasswordValidator;
+import com.example.projectx.backend.PasswordValidator;
 import com.example.projectx.backend.NumberValidation;
 import com.example.projectx.R;
 import com.example.projectx.backend.readAndWrite;
