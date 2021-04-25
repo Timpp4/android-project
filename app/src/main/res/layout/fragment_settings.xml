@@ -8,9 +8,16 @@
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:textSize="30dp"
-        android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Asetukset" />
+
+    <Button
+        android:id="@+id/btnToggle"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="Enable night mode"/>
 
 </RelativeLayout>
