@@ -31,10 +31,11 @@ public class SettingsFragment extends Fragment {
 
         SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
         final SharedPreferences.Editor editor = sharedPreferences.edit();
+        //Creating dark mode state to sharedPreference memory
         final boolean isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn", false);
 
 
-
+        // Check if dark mode is on
         if (isDarkModeOn){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             btnToggle.setText("Disable night mode");
@@ -43,6 +44,7 @@ public class SettingsFragment extends Fragment {
             btnToggle.setText("Enable night mode");
         }
 
+        // Toggle button logic. Change button text Enable/Disable
         btnToggle.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("SetTextI18n")
             @Override

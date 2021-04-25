@@ -31,10 +31,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
         return v;
     }
-
+    //Log out logic
     @Override
     public void onClick(View view) {
-        // Fragment navigation logic
         if (view.getId() == logOutButton.getId()) {
             getActivity().finish();
             //((LoginSignUp) getActivity()).navigateToLogin();
