@@ -153,8 +153,9 @@ public class readAndWrite {
         System.out.println("käyttäjä luotiin onnistuneesti");
         return true;
     }
-    public ArrayList<DataObject> readUserData(String username) {
+    public ArrayList<DataObject> readUserData() {
 
+        String username = "juho";
         ArrayList<DataObject> dataObject = new ArrayList<DataObject>();
         try {
             File path = context.getExternalFilesDir(null);
@@ -185,10 +186,8 @@ public class readAndWrite {
                 i++;
             }
         } catch (Exception e) {
-            System.out.println("******** TESTI 666********");
             System.out.println(e);
         }
-        System.out.println("****DATAOBJECT SIZE: " + dataObject.size());
         Collections.sort(dataObject);
 
         return dataObject;
