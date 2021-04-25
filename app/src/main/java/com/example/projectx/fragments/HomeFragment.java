@@ -175,7 +175,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         EditText test = null;
         NumberValidation nv = new NumberValidation(test);
         DateValidation dv = new DateValidation();
-        readAndWrite rw = new readAndWrite(null);
+        readAndWrite rw = new readAndWrite(getContext());
         EditText insDate = getView().findViewById(R.id.textDate);
         String date = insDate.getText().toString();
         System.out.println(dv.DateValidation(date));

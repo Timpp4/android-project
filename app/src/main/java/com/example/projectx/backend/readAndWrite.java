@@ -21,6 +21,7 @@ public class readAndWrite {
     public boolean readFile(String username, String password) {
         try {
             File path = context.getExternalFilesDir(null);
+            System.out.println("path is ... " + path);
             File file = new File(path, "userInfo.txt");
             int length = (int) file.length();
             byte[] bytes = new byte[length];
@@ -155,9 +156,7 @@ public class readAndWrite {
 
         ArrayList<DataObject> dataObject = new ArrayList<DataObject>();
         try {
-            System.out.println("******** TESTI 2********");
             File path = context.getExternalFilesDir(null);
-            System.out.println("*******TESTI 12 " );
             File file = new File(path, username + ".txt");
             int length = (int) file.length();
             byte[] bytes = new byte[length];
@@ -173,9 +172,7 @@ public class readAndWrite {
             arrayLength = line_parsed.length;
 
             while (i < arrayLength) {
-                System.out.println("******** TESTI 3********");
                 if (i != 0){
-                    System.out.println("******************HALOOOO***************");
                     String user = line_parsed[i];
                     String[] user_parsed;
                     user_parsed = user.split(";");
