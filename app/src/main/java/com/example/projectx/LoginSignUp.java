@@ -29,6 +29,8 @@ public class LoginSignUp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.a_login_signup_layout);
+
+        //Hiding action bar
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 

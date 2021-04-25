@@ -14,9 +14,12 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.projectx.LoginSignUp;
+import com.example.projectx.PasswordValidator;
 import com.example.projectx.backend.NumberValidation;
 import com.example.projectx.R;
 import com.example.projectx.backend.readAndWrite;
+
+
 
 //vanha
 public class RegisterFragment extends Fragment implements View.OnClickListener{
@@ -36,7 +39,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
         signUpButton = (Button) v.findViewById(R.id.btn_signup);
         signUpButton.setOnClickListener(this);
         Spinner spinner = v.findViewById(R.id.et_sexSpinner);
-        // Array of (gender) spinner items created
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.genders_array, android.R.layout.simple_spinner_item);
 
@@ -58,6 +60,10 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
         System.out.println(tv_user.getText().toString());
 
         EditText tv_pass = getView().findViewById(R.id.et_password);
+        String password = tv_pass.getText().toString();
+        if (!PasswordValidator.isValid(password)){
+            password = "";
+        }
         System.out.println(tv_pass.getText().toString());
 
         EditText tv_height = getView().findViewById(R.id.et_height);
@@ -81,7 +87,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
         System.out.println(gender);
 
         if (rw.createNewUser(tv_user.getText().toString(),
-                tv_pass.getText().toString(),
+                password,
                 height,
                 weight,
                 age,
@@ -97,8 +103,10 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
         else if (tv_user.getText().toString().trim().length() == 0){
             tv_user.setError("Invalid username!");
         }
-        else if (tv_pass.getText().toString() == null || tv_pass.getText().toString().length() < 12) {
-            tv_pass.setError("Password must be at least 12 characters!");
+        else if (tv_pass.getText().toString() == null || !PasswordValidator.isValid(tv_pass.getText().toString())) {
+            tv_pass.setError("Invalid password");
+        /*else if (tv_pass.getText().toString() == null || tv_pass.getText().toString().length() < 12) {
+            tv_pass.setError("Password must be at least 12 characters!");*/
         }
         else if (height < 0 || 300 < height) {
             tv_height.setError("Height must be between 0 and 300!");
