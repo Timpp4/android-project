@@ -18,12 +18,15 @@ import com.example.projectx.R;
 import com.example.projectx.backend.readAndWrite;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ProfileFragment extends Fragment implements View.OnClickListener {
 
 
     private Button logOutButton;
+    private Button updateButton;
 
     @Nullable
     @Override
@@ -32,7 +35,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
         logOutButton = (Button) v.findViewById(R.id.btn_logOut);
         logOutButton.setOnClickListener(this);
-
+        updateButton = (Button) v.findViewById(R.id.btn_update);
+        updateButton.setOnClickListener(this);
+        update(v);
 
 
 
@@ -45,6 +50,14 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             getActivity().finish();
             //((LoginSignUp) getActivity()).navigateToLogin();
         }
+    }
+    //Update profile information
+    public void update(View view) {
+        readAndWrite rw = new readAndWrite(getContext());
+        List<String> infoList = new ArrayList<String>();
+        infoList = rw.profileInfo();
+        System.out.println(infoList);
+
     }
 
 

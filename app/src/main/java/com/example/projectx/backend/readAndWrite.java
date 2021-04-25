@@ -241,14 +241,15 @@ public class readAndWrite {
             String[] line_parsed;
             line_parsed = contents.split("\n"); // rivi
             int arrayLength;
-            int i = 1;
+            int i = 0;
             arrayLength = line_parsed.length;
             //Kommentti
+            System.out.println(arrayLength);
             while (i < arrayLength) {
                 String row = line_parsed[i];
                 String[] row_parsed;
                 row_parsed = row.split(";");
-                if (i == 1) {
+                if (i == 0) {
                     infoList.add(row_parsed[0]);
                     infoList.add(row_parsed[1]);
                     infoList.add(row_parsed[3]);
