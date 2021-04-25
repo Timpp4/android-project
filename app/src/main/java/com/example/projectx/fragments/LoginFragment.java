@@ -1,10 +1,9 @@
-package com.example.projectx;
+package com.example.projectx.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -12,6 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.projectx.MainActivity;
+import com.example.projectx.R;
+import com.example.projectx.backend.readAndWrite;
 
 public class LoginFragment extends Fragment implements View.OnClickListener{
 

@@ -1,19 +1,11 @@
-package com.example.projectx;
+package com.example.projectx.fragments;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Color;
-import android.icu.util.TimeZone;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import android.os.StrictMode;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +14,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.projectx.interfaces.CountriesAPI;
+import com.example.projectx.backend.DateValidation;
+import com.example.projectx.backend.NumberValidation;
+import com.example.projectx.R;
+import com.example.projectx.interfaces.BmiBackend;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -35,7 +30,6 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 
 public class HomeFragment extends Fragment implements View.OnClickListener {

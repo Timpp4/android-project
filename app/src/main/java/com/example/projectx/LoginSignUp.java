@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.example.projectx.fragments.ChooseFragment;
+import com.example.projectx.fragments.LoginFragment;
+import com.example.projectx.fragments.RegisterFragment;
 
 import java.util.ArrayList;
 import java.util.List;

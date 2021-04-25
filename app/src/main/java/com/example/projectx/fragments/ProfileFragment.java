@@ -1,4 +1,4 @@
-package com.example.projectx;
+package com.example.projectx.fragments;
 
 import android.os.Bundle;
 
@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import com.example.projectx.R;
 
 import java.io.File;
 

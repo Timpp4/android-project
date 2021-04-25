@@ -1,4 +1,6 @@
-package com.example.projectx;
+package com.example.projectx.interfaces;
+
+import com.example.projectx.backend.BmiObject;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

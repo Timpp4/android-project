@@ -1,4 +1,4 @@
-package com.example.projectx;
+package com.example.projectx.fragments;
 
 import android.os.Bundle;
 
@@ -12,6 +12,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+
+import com.example.projectx.LoginSignUp;
+import com.example.projectx.backend.NumberValidation;
+import com.example.projectx.R;
+import com.example.projectx.backend.readAndWrite;
 
 //vanha
 public class RegisterFragment extends Fragment implements View.OnClickListener{

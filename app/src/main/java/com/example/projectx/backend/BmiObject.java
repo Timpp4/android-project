@@ -1,4 +1,4 @@
-package com.example.projectx;
+package com.example.projectx.backend;
 
 public class BmiObject {
 
