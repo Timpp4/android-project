@@ -5,8 +5,11 @@ import android.content.Context;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class readAndWrite {
+
 
     private Context context;
     public readAndWrite(Context context) { this.context=context; }
@@ -132,10 +135,14 @@ public class readAndWrite {
         }
         try {
             String row = username + ";" + height.toString() + ";" + weight.toString() + ";" + yearBorn.toString() + ";" + sex.toLowerCase() + "\n";
+            String date = new SimpleDateFormat("dd.MM.yyyy").format(new Date());
+            String row_dateWeight = date + ";" + weight.toString() + "\n";
+
             File path = context.getExternalFilesDir(null);
             File file = new File(path, username + ".txt");
             FileOutputStream stream = new FileOutputStream(file, true);
             stream.write(row.getBytes());
+            stream.write(row_dateWeight.getBytes());
             stream.close();
         } catch (Exception e) {
             System.out.println(e);

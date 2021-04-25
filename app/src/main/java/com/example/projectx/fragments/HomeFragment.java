@@ -177,7 +177,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         System.out.println(weight);
         if (dv.DateValidation(date) && 0 < weight && weight < 600){
             //Toast.makeText(Objects.requireNonNull(getActivity()).getBaseContext(), bb., Toast.LENGTH_LONG).show();
-            //TODO: Lisää lokiin
             readAndWrite rw = new readAndWrite(getContext());
             rw.insertWeight(date, weight);
 
