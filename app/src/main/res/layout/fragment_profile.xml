@@ -28,7 +28,7 @@
                 app:civ_border_color="#000"/>
 
             <TextView
-                android:id="@+id/userName"
+                android:id="@+id/profile_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nyman"
@@ -51,7 +51,6 @@
             android:columnOrderPreserved="false">
 
             <androidx.cardview.widget.CardView
-                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
@@ -74,18 +73,18 @@
                         android:layout_height="80dp"/>
 
                     <TextView
-                        android:layout_marginTop="12dp"
-                        android:textSize="18sp"
-                        android:text="Pituus: 180cm"
+                        android:id="@+id/profile_height"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="Pituus: 180cm"
+                        android:textSize="18sp" />
 
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
@@ -108,18 +107,18 @@
                         android:layout_height="80dp"/>
 
                     <TextView
-                        android:layout_marginTop="12dp"
-                        android:textSize="18sp"
-                        android:text="Paino: 58kg"
+                        android:id="@+id/profile_weight"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="Paino: 58kg"
+                        android:textSize="18sp" />
 
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
@@ -142,18 +141,18 @@
                         android:layout_height="80dp"/>
 
                     <TextView
-                        android:layout_marginTop="12dp"
-                        android:textSize="18sp"
-                        android:text="Synt: 17.05.2021"
+                        android:id="@+id/profile_yearBorn"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="Synt: 17.05.2021"
+                        android:textSize="18sp" />
 
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
@@ -176,11 +175,12 @@
                         android:layout_height="80dp"/>
 
                     <TextView
-                        android:layout_marginTop="12dp"
-                        android:textSize="18sp"
-                        android:text="Sukupuoli:"
+                        android:id="@+id/profile_sex"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="Sukupuoli:"
+                        android:textSize="18sp" />
 
                 </LinearLayout>
 

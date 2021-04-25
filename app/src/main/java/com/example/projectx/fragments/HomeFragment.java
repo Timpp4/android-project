@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.example.projectx.backend.BmiCalculator;
+import com.example.projectx.backend.DataObject;
 import com.example.projectx.backend.readAndWrite;
 import com.example.projectx.interfaces.CountriesAPI;
 import com.example.projectx.backend.DateValidation;
@@ -22,7 +24,9 @@ import com.example.projectx.backend.NumberValidation;
 import com.example.projectx.R;
 import com.example.projectx.interfaces.BmiBackend;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -42,6 +46,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        final String YEAR = "2016";
         View paramView = inflater.inflate(R.layout.fragment_home, container, false);
         final String[] avgBmi = {""};
 
@@ -84,13 +90,17 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 mpLineChart.clear();
                 String country = ca.countryList().get(position);
                 bb.whoRequest(ca.countriesRequest(country));
-                if(bb.getBmiFromWho ("Male", "2000") == null){
-                    avgBmi[0] = bb.getBmiFromWho("Both sexes", "2016");
+                readAndWrite rw = new readAndWrite(getContext());
+                //TODO: Vaihda sex ja vuosi muuttujien mukaan
+                if(bb.getBmiFromWho ("Male", YEAR) == null){
+                    avgBmi[0] = bb.getBmiFromWho("Both sexes", YEAR);
                 }else{
-                    System.out.println("*******AVG BMI: "+bb.getBmiFromWho("Male", "2000"));
+                    //TODO: Lisää sukupuoli muuttuja profiililta
+                    avgBmi[0] = bb.getBmiFromWho("Male", YEAR);
                 }
                 // Initializing BMI graphs and styles
-                LineDataSet lineDataSet1 = new LineDataSet(userBmiValues(), "Oma BMI");
+                LineDataSet lineDataSet1 = new LineDataSet(userBmiValues(rw.readUserData
+                        ("juho")), "Oma BMI");
                 lineDataSet1.setLineWidth(2);
                 lineDataSet1.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
                 lineDataSet1.setDrawCircles(true);
@@ -104,6 +114,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 dataSets.add(lineDataSet1);
 
                 // Initializing Comparison graph and styles
+
                 LineDataSet lineDataSet2 = new LineDataSet(whoBmiConstant(), "Vertailu BMI");
                 lineDataSet2.setColor(Color.RED);
                 lineDataSet2.setLineWidth(3f);
@@ -127,18 +138,23 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     @NotNull
-    private ArrayList<Entry> userBmiValues()
+    private ArrayList<Entry> userBmiValues(ArrayList<DataObject> dataObject)
     /**
      * Tässä aliohjelmassa luetaan käyttän painodata ja muunnetaan BMI:ksi BMI luokan avulla
      */
     {
+        BmiCalculator bc = new BmiCalculator();
         //TODO: Lisää profiililta paino ja päivänmäärä data tähän. (x=bmi, y= pvm)
         ArrayList<Entry> userBmiVals = new ArrayList<Entry>();
-        userBmiVals.add(new Entry(0, 20));
+        for (int i = 0; i < dataObject.size(); i++){
+            //userBmiVals.add(new Entry(i, bc.calculateBmi((float) dataObject.get(i).getWeight())));
+        }
+
+        /*userBmiVals.add(new Entry(0, 20));
         userBmiVals.add(new Entry(1, 24));
         userBmiVals.add(new Entry(2, 5));
         userBmiVals.add(new Entry(3, 10));
-        userBmiVals.add(new Entry(4, 25));
+        userBmiVals.add(new Entry(4, 25));*/
 
         return userBmiVals;
     }
@@ -153,6 +169,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     {
         //TODO: Lisää profiililta paino ja päivänmäärä data tähän.
         ArrayList<Entry> whoBmiVals = new ArrayList<Entry>();
+
         //TODO: for-looppi, jolla lisätään pvmt x ja whoAPI tieto vakiona y
         whoBmiVals.add(new Entry(0, 25));
         whoBmiVals.add(new Entry(1, 25));
@@ -168,6 +185,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         EditText test = null;
         NumberValidation nv = new NumberValidation(test);
         DateValidation dv = new DateValidation();
+        readAndWrite rw = new readAndWrite(getContext());
         EditText insDate = getView().findViewById(R.id.textDate);
         String date = insDate.getText().toString();
         System.out.println(dv.DateValidation(date));
@@ -176,9 +194,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         double weight = nv.doubleValidation(insWeight);
         System.out.println(weight);
         if (dv.DateValidation(date) && 0 < weight && weight < 600){
+            userBmiValues(rw.readUserData("juho"));
             //Toast.makeText(Objects.requireNonNull(getActivity()).getBaseContext(), bb., Toast.LENGTH_LONG).show();
-            readAndWrite rw = new readAndWrite(getContext());
             rw.insertWeight(date, weight);
+            System.out.println("******** TESTI ********");
+            rw.readUserData("juho");
 
         }
         else if (!dv.DateValidation(date)) {

@@ -11,8 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.projectx.R;
+import com.example.projectx.backend.readAndWrite;
 
 import java.io.File;
 
@@ -25,9 +28,13 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
         logOutButton = (Button) v.findViewById(R.id.btn_logOut);
         logOutButton.setOnClickListener(this);
+
+
+
 
         return v;
     }

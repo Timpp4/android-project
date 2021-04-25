@@ -6,10 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
+import com.example.projectx.backend.readAndWrite;
 import com.example.projectx.fragments.HomeFragment;
 import com.example.projectx.fragments.InfoFragment;
 import com.example.projectx.fragments.LoginFragment;
@@ -21,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     private BottomNavigationView bottomNavigationView;
+    Context context = this.getApplicationContext();
+
 
 
 
@@ -62,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
                             break;
 
                         case R.id.profile:
+
                             fragment = new ProfileFragment();
                             break;
 
