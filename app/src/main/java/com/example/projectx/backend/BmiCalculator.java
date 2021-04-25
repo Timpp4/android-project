@@ -6,7 +6,8 @@ public class BmiCalculator {
     double bmi;
 
     public double calculateBmi(double weight, double height){
-        bmi = weight/(height*height);
+        bmi = weight/((height/100)*(height/100));
+        System.out.println("********BMI DATA: " + weight + " " +height+" " +bmi);
         return bmi;
     }
 
