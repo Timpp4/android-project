@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.example.projectx.backend.readAndWrite;
 import com.example.projectx.interfaces.CountriesAPI;
 import com.example.projectx.backend.DateValidation;
 import com.example.projectx.backend.NumberValidation;
@@ -176,7 +177,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         System.out.println(weight);
         if (dv.DateValidation(date) && 0 < weight && weight < 600){
             //Toast.makeText(Objects.requireNonNull(getActivity()).getBaseContext(), bb., Toast.LENGTH_LONG).show();
-            //TODO: Lisää lokiin
+            readAndWrite rw = new readAndWrite(getContext());
+            rw.insertWeight(date, weight);
+
         }
         else if (!dv.DateValidation(date)) {
             insDate.setError("Date isn't valid");
