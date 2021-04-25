@@ -9,6 +9,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 
 public class readAndWrite {
@@ -22,6 +23,7 @@ public class readAndWrite {
     public boolean readFile(String username, String password) {
         try {
             File path = context.getExternalFilesDir(null);
+            System.out.println("path is ... " + path);
             File file = new File(path, "userInfo.txt");
             int length = (int) file.length();
             byte[] bytes = new byte[length];
@@ -152,13 +154,10 @@ public class readAndWrite {
         return true;
     }
     public ArrayList<DataObject> readUserData(String username) {
-        System.out.println("******** TESTI 1********");
 
         ArrayList<DataObject> dataObject = new ArrayList<DataObject>();
         try {
-            System.out.println("******** TESTI 2********");
             File path = context.getExternalFilesDir(null);
-            System.out.println("*******TESTI 12 " );
             File file = new File(path, username + ".txt");
             int length = (int) file.length();
             byte[] bytes = new byte[length];
@@ -174,9 +173,7 @@ public class readAndWrite {
             arrayLength = line_parsed.length;
 
             while (i < arrayLength) {
-                System.out.println("******** TESTI 3********");
                 if (i != 0){
-                    System.out.println("******************HALOOOO***************");
                     String user = line_parsed[i];
                     String[] user_parsed;
                     user_parsed = user.split(";");
@@ -184,7 +181,6 @@ public class readAndWrite {
                             .parse(user_parsed[0]);
                     double weight = Double.parseDouble(user_parsed[1]);
                     dataObject.add(new DataObject(date, weight));
-                    System.out.println("****DATAOBJECT: " + dataObject.get(i));
                 }
                 i++;
             }
@@ -192,6 +188,9 @@ public class readAndWrite {
             System.out.println("******** TESTI 666********");
             System.out.println(e);
         }
+        System.out.println("****DATAOBJECT SIZE: " + dataObject.size());
+        Collections.sort(dataObject);
+
         return dataObject;
     }
 
@@ -264,9 +263,6 @@ public class readAndWrite {
         }
 
     }
-
-
-
 
 
 
