@@ -17,6 +17,8 @@ import android.widget.TextView;
 import com.example.projectx.R;
 import com.example.projectx.backend.readAndWrite;
 
+import org.w3c.dom.Text;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,47 +26,41 @@ import java.util.List;
 
 public class ProfileFragment extends Fragment implements View.OnClickListener {
 
-
     private Button logOutButton;
-    private Button updateButton;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
         logOutButton = (Button) v.findViewById(R.id.btn_logOut);
         logOutButton.setOnClickListener(this);
-        updateButton = (Button) v.findViewById(R.id.btn_update);
-        updateButton.setOnClickListener(this);
         update(v);
-
-
-
         return v;
     }
-    //Log out logic
+
+    // Log out logic
     @Override
     public void onClick(View view) {
         if (view.getId() == logOutButton.getId()) {
             getActivity().finish();
-            //((LoginSignUp) getActivity()).navigateToLogin();
         }
     }
-    //Update profile information
+
+    // Update profile information
     public void update(View view) {
         readAndWrite rw = new readAndWrite(getContext());
         List<String> infoList = new ArrayList<String>();
         infoList = rw.profileInfo();
-        System.out.println(infoList);
-
+        TextView tv1 = view.findViewById(R.id.profile_username);
+        TextView tv2 = view.findViewById(R.id.profile_weight);
+        TextView tv3 = view.findViewById(R.id.profile_height);
+        TextView tv4 = view.findViewById(R.id.profile_yearBorn);
+        TextView tv5 = view.findViewById(R.id.profile_sex);
+        tv1.setText(infoList.get(0)); //username
+        tv2.setText("Weight: " + infoList.get(4) + " kg"); //weight
+        tv3.setText("Height: " + infoList.get(1) + " cm"); //height
+        tv4.setText("Year of birth: " + infoList.get(2)); //yearBorn
+        tv5.setText("Gender: " + infoList.get(3)); //sex
     }
-
-
-
-
-
-
-
 }
 
