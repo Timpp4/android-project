@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private BottomNavigationView bottomNavigationView;
-    Context context = this.getApplicationContext();
+    //Context context = this.getApplicationContext();
 
 
 
@@ -68,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
                             break;
 
                         case R.id.profile:
-
                             fragment = new ProfileFragment();
                             break;
 
