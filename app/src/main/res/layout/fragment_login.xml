@@ -12,8 +12,11 @@
         android:layout_height="wrap_content"
         android:text="@string/header_name"
         android:textSize="50sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
         android:layout_marginStart="25dp"
         android:layout_marginBottom="10dp"
+        android:layout_marginTop="70dp"
         android:layout_above="@id/tv_subtitle"/>
 
     <TextView
@@ -22,6 +25,8 @@
         android:layout_height="wrap_content"
         android:text="@string/subtitle"
         android:textSize="17sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
         android:layout_marginStart="30dp"
         android:layout_marginBottom="50dp"
         android:layout_above="@id/et_email"/>
@@ -61,7 +66,7 @@
         android:layout_marginTop="15dp"
         android:background="@drawable/btn_custom"
         android:textColor="@android:color/white"
-        android:text="Login"/>
+        android:text="Log in"/>
 
 
 
