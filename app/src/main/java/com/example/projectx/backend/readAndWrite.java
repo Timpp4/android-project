@@ -1,11 +1,13 @@
 package com.example.projectx.backend;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class readAndWrite {
@@ -97,8 +99,6 @@ public class readAndWrite {
         return false;
     }
 
-
-
     // Save newly created username and password for login
     public boolean writeFile(String username, String password) {
         if (username.trim().length() == 0 || password.length() < 12){
@@ -150,6 +150,49 @@ public class readAndWrite {
         System.out.println("käyttäjä luotiin onnistuneesti");
         return true;
     }
+    public ArrayList<DataObject> readUserData(String username) {
+        System.out.println("******** TESTI 1********");
+
+        ArrayList<DataObject> dataObject = new ArrayList<DataObject>();
+        try {
+            System.out.println("******** TESTI 2********");
+            File path = context.getExternalFilesDir(null);
+            System.out.println("*******TESTI 12 " );
+            File file = new File(path, username + ".txt");
+            int length = (int) file.length();
+            byte[] bytes = new byte[length];
+            FileInputStream in = new FileInputStream(file);
+            in.read(bytes);
+            in.close();
+            String contents = new String(bytes);
+
+            String[] line_parsed;
+            line_parsed = contents.split("\n"); // rivi
+            int arrayLength;
+            int i = 0;
+            arrayLength = line_parsed.length;
+
+            while (i < arrayLength) {
+                System.out.println("******** TESTI 3********");
+                if (i != 0){
+                    System.out.println("******************HALOOOO***************");
+                    String user = line_parsed[i];
+                    String[] user_parsed;
+                    user_parsed = user.split(";");
+                    @SuppressLint("SimpleDateFormat") Date date =new SimpleDateFormat("dd.MM.yyyy")
+                            .parse(user_parsed[0]);
+                    double weight = Double.parseDouble(user_parsed[1]);
+                    dataObject.add(new DataObject(date, weight));
+                    System.out.println("****DATAOBJECT: " + dataObject.get(i));
+                }
+                i++;
+            }
+        } catch (Exception e) {
+            System.out.println("******** TESTI 666********");
+            System.out.println(e);
+        }
+        return dataObject;
+    }
 
     public void insertWeight(String date, Double weight) {
         try {
@@ -165,7 +208,7 @@ public class readAndWrite {
 
             String row = date + ";" + weight + "\n";
 
-            File file_insertWeight = new File(path,"tuomas.txt");
+            File file_insertWeight = new File(path, contents + ".txt");
             FileOutputStream stream = new FileOutputStream(file_insertWeight, true);
             stream.write(row.getBytes());
             stream.close();
