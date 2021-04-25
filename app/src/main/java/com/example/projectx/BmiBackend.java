@@ -25,10 +25,11 @@ import javax.xml.parsers.ParserConfigurationException;
 public class BmiBackend {
     ArrayList<BmiObject> bmiData = new ArrayList<BmiObject>();
 
-    public void whoRequest () {
+    public void whoRequest (String country) {
         try {
+            String requestUrl = "https://apps.who.int/gho/athena/api/GHO/NCD_BMI_MEAN.xml?filter=COUNTRY"+country+"&profile=simple";
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            URL url = new URL("https://apps.who.int/gho/athena/api/GHO/NCD_BMI_MEAN.xml?filter=COUNTRY:FIN&profile=simple");
+            URL url = new URL(requestUrl);
             URLConnection urlc = url.openConnection();
             urlc.setRequestProperty("User-Agent", "Mozilla 5.0 (Windows; U; "
                     + "Windows NT 5.1; en-US; rv:1.8.0.11) ");
@@ -57,11 +58,9 @@ public class BmiBackend {
         }
     }
     public String getBmiFromWho(String sex, String year){
-        //double avgBmi = 0;
         String avgBmiByYear = null;
         for (int i = 0; i < bmiData.size(); i++){
-            if (bmiData.get(i).getYear().equals(year) & bmiData.get(i).getSex().equals(sex))
-                //avgBmi = Double.parseDouble(bmiData.get(i).getBmi());
+            if (bmiData.get(i).getYear().equals(year) && bmiData.get(i).getSex().equals(sex))
                 avgBmiByYear = (bmiData.get(i).getBmi());
         }
         return avgBmiByYear;

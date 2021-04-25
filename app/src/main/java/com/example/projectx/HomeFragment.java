@@ -47,40 +47,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy
-                .Builder()
-                .permitAll()
-                .build();
-        StrictMode.setThreadPolicy(policy);
-        BmiBackend bb = new BmiBackend();
-        CountriesAPI ca = new CountriesAPI();
-        bb.whoRequest();
-        System.out.println("********" + bb.getBmiFromWho("Male", "2016"));
         View paramView = inflater.inflate(R.layout.fragment_home, container, false);
-        insert = (Button) paramView.findViewById(R.id.btnInsertWeight);
-        insert.setOnClickListener(this);
-
-        Spinner spinner = paramView.findViewById(R.id.countrySpinner);
-        ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_spinner_item, ca.countryList());
-        countryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(countryAdapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                System.out.println("Parent: " +parent+ " position: " +position+ " id: "+id);
-                String country = ca.countryList().get(position);
-                ca.countriesRequest(country);
-                System.out.println("**************************VALITTU MAA: " +country);
-                //ca.countriesRequest(country);
-                //stuff here to handle item selection
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+        final String[] avgBmi = {""};
 
 
         /**
@@ -96,32 +64,69 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         //Initializing the list for graphs
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();
 
-        // Initializing BMI graphs and styles
-        LineDataSet lineDataSet1 = new LineDataSet(userBmiValues(), "Oma BMI");
-        lineDataSet1.setLineWidth(2);
-        lineDataSet1.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
-        lineDataSet1.setDrawCircles(true);
-        lineDataSet1.setCircleColor(Color.BLACK);
-        lineDataSet1.setCircleHoleRadius(3f);
-        lineDataSet1.setColor(Color.MAGENTA);
-        lineDataSet1.setDrawFilled(true);
-        lineDataSet1.setFillColor(Color.MAGENTA);
-        lineDataSet1.setFillAlpha(30);
-        lineDataSet1.setValueTextSize(12f);
-        dataSets.add(lineDataSet1);
 
-        // Initializing Comparison graph and styles
-        LineDataSet lineDataSet2 = new LineDataSet(whoBmiConstant(), "Vertailu BMI");
-        lineDataSet2.setColor(Color.RED);
-        lineDataSet2.setLineWidth(3f);
-        lineDataSet2.setDrawCircles(false);
-        lineDataSet2.setDrawValues(false);
-        dataSets.add(lineDataSet2);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy
+                .Builder()
+                .permitAll()
+                .build();
+        StrictMode.setThreadPolicy(policy);
+        BmiBackend bb = new BmiBackend();
+        CountriesAPI ca = new CountriesAPI();
 
-        //Creating graphs to UI
-        LineData data = new LineData(dataSets);
-        mpLineChart.setData(data);
-        mpLineChart.invalidate();
+        insert = (Button) paramView.findViewById(R.id.btnInsertWeight);
+        insert.setOnClickListener(this);
+
+        Spinner spinner = paramView.findViewById(R.id.countrySpinner);
+        ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_spinner_item, ca.countryList());
+        countryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(countryAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                dataSets.clear();
+                mpLineChart.invalidate();
+                mpLineChart.clear();
+                String country = ca.countryList().get(position);
+                bb.whoRequest(ca.countriesRequest(country));
+                if(bb.getBmiFromWho ("Male", "2000") == null){
+                    avgBmi[0] = bb.getBmiFromWho("Both sexes", "2016");
+                }else{
+                    System.out.println("*******AVG BMI: "+bb.getBmiFromWho("Male", "2000"));
+                }
+                // Initializing BMI graphs and styles
+                LineDataSet lineDataSet1 = new LineDataSet(userBmiValues(), "Oma BMI");
+                lineDataSet1.setLineWidth(2);
+                lineDataSet1.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
+                lineDataSet1.setDrawCircles(true);
+                lineDataSet1.setCircleColor(Color.BLACK);
+                lineDataSet1.setCircleHoleRadius(3f);
+                lineDataSet1.setColor(Color.MAGENTA);
+                lineDataSet1.setDrawFilled(true);
+                lineDataSet1.setFillColor(Color.MAGENTA);
+                lineDataSet1.setFillAlpha(30);
+                lineDataSet1.setValueTextSize(12f);
+                dataSets.add(lineDataSet1);
+
+                // Initializing Comparison graph and styles
+                LineDataSet lineDataSet2 = new LineDataSet(whoBmiConstant(), "Vertailu BMI");
+                lineDataSet2.setColor(Color.RED);
+                lineDataSet2.setLineWidth(3f);
+                lineDataSet2.setDrawCircles(false);
+                lineDataSet2.setDrawValues(false);
+                dataSets.add(lineDataSet2);
+
+                //Creating graphs to UI
+                LineData data = new LineData(dataSets);
+                mpLineChart.setData(data);
+                mpLineChart.invalidate();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         return paramView;
     }
