@@ -33,7 +33,7 @@ public class readAndWrite {
             String contents = new String(bytes);
 
             String[] line_parsed;
-            line_parsed = contents.split("\n"); // rivi
+            line_parsed = contents.split("\n"); // Row
             int arrayLength;
             int i = 0;
             arrayLength = line_parsed.length;
@@ -195,7 +195,7 @@ public class readAndWrite {
 
     public void insertWeight(String date, Double weight) {
         try {
-            //etsi mihin kirjoitetaan
+            //Find where to write
             File path = context.getExternalFilesDir(null);
             File file = new File(path, "tmp.txt");
             int length = (int) file.length();
@@ -203,7 +203,7 @@ public class readAndWrite {
             FileInputStream in = new FileInputStream(file);
             in.read(bytes);
             in.close();
-            String contents = new String(bytes); //käyttäjänimi = contents
+            String contents = new String(bytes); //Username = contents
 
             String row = date + ";" + weight + "\n";
 

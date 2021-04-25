@@ -47,7 +47,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
             // Start MainActivity after login information input
             if (view.getId() == loginButton.getId()) {
                 System.out.println("loginfragmentissa..........");
-                // MainActivity executes bottomNavigation fragment
+                // MainActivity executes bottomNavigationBar fragment
                 Intent MainIntent = new Intent(getActivity(), MainActivity.class);
                 startActivity(MainIntent);
 
