@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/wallpaper"
     android:layout_height="match_parent"
-    android:background="#fff"
     >
 
     <TextView
@@ -12,7 +12,10 @@
         android:layout_height="wrap_content"
         android:text="@string/header_name"
         android:textSize="50sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
         android:layout_marginStart="25dp"
+        android:layout_marginTop="70dp"
         android:layout_marginBottom="10dp"
         />
 
@@ -22,6 +25,7 @@
         android:layout_height="wrap_content"
         android:text="@string/subtitle"
         android:textSize="17sp"
+        android:textStyle="bold"
         android:layout_marginStart="30dp"
         android:layout_marginBottom="50dp"
         android:layout_below="@id/tv_title"/>
@@ -32,11 +36,11 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="150dp"
         android:layout_below="@+id/tv_subtitle"
         android:background="@drawable/btn_custom"
         android:textColor="@android:color/white"
-        android:text="Login"/>
+        android:text="Log in"/>
 
 
     <androidx.appcompat.widget.AppCompatButton
@@ -45,7 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_subtitle"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="246dp"
+        android:layout_marginTop="210dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/btn_custom"
         android:text="Sign up"

@@ -1,16 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.projectx.fragments.InfoFragment">
+    android:background="@drawable/wallpaper"
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
+
     <TextView
-        android:textSize="30dp"
-        android:layout_centerInParent="true"
+        android:id="@+id/subject"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:background="@drawable/rounded_corner"
+        android:hint="Data:"
+        android:padding="16dp" />
+
+    <EditText
+        android:id="@+id/message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/subject"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:background="@drawable/rounded_corner"
+        android:gravity="top"
+        android:hint="Insert id to remove:"
+        android:padding="16dp" />
+
+    <com.google.android.material.button.MaterialButton
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tarkemmat tiedot" />
-
+        android:layout_below="@+id/message"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:padding="16dp"
+        app:cornerRadius="100dp"
+        android:text="Remove" />
 </RelativeLayout>
