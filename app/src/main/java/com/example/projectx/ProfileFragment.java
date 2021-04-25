@@ -3,6 +3,7 @@ package com.example.projectx;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
@@ -33,7 +34,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         // Fragment navigation logic
         if (view.getId() == logOutButton.getId()) {
-            ((LoginSignUp) getActivity()).navigateToLogin();
+            getActivity().finish();
+            //((LoginSignUp) getActivity()).navigateToLogin();
         }
     }
 }

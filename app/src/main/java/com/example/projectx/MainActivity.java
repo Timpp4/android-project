@@ -1,6 +1,7 @@
 package com.example.projectx;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.a_navigation_layout);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
         getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).add(R.id.container, new LoginFragment()).commit();
         bottomNavigationView = findViewById(R.id.bottomNavigation);

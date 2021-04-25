@@ -2,6 +2,7 @@ package com.example.projectx;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -26,6 +27,8 @@ public class LoginSignUp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.a_login_signup_layout);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
 
         chooseFragment = new ChooseFragment();
