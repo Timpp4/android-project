@@ -85,7 +85,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
                 height,
                 weight,
                 age,
-                gender) == true) {
+                gender)) {
 
             if (view.getId() == signUpButton.getId()) {
                 ((LoginSignUp) getActivity()).navigateToLogin();

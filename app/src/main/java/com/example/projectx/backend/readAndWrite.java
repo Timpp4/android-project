@@ -2,6 +2,7 @@ package com.example.projectx.backend;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.widget.TextView;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -217,6 +218,53 @@ public class readAndWrite {
         }
 
     }
+
+    public void profileInfo(TextView user, TextView height, TextView weight, TextView yearBorn, TextView sex) {
+        try {
+            File path = context.getExternalFilesDir(null);
+            File file_tmp = new File(path, "tmp.txt");
+            int length_tmp = (int) file_tmp.length();
+            byte[] bytes_tmp = new byte[length_tmp];
+            FileInputStream in_tmp = new FileInputStream(file_tmp);
+            in_tmp.read(bytes_tmp);
+            in_tmp.close();
+            String username = new String(bytes_tmp);
+
+            File file = new File(path, username + ".txt");
+            int length = (int) file.length();
+            byte[] bytes = new byte[length];
+            FileInputStream in = new FileInputStream(file);
+            in.read(bytes);
+            in.close();
+            String contents = new String(bytes);
+            String[] line_parsed;
+            line_parsed = contents.split("\n"); // rivi
+            int arrayLength;
+            int i = 1;
+            arrayLength = line_parsed.length;
+
+            while (i < arrayLength) {
+                String row = line_parsed[i];
+                String[] row_parsed;
+                row_parsed = row.split(";");
+                if (i == 1) {
+                    user.setText(username);
+                    height.setText(row_parsed[1]);
+                    yearBorn.setText(row_parsed[3]);
+                    sex.setText(row_parsed[4]);
+                }
+                else if (i == arrayLength-1) {
+                    weight.setText(row_parsed[1]);
+                }
+                i++;
+            }
+
+        } catch (Exception e) {
+            System.out.println("profiili error " + e);
+        }
+
+    }
+
 
 
 
