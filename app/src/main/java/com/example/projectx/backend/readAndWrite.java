@@ -157,7 +157,7 @@ public class readAndWrite {
     }
     public ArrayList<DataObject> readUserData() {
         //TODO: Tee usernamen etsintä
-        String username = "juho";
+        String username = getUsername();
         ArrayList<DataObject> dataObject = new ArrayList<DataObject>();
         try {
             File path = context.getExternalFilesDir(null);
@@ -266,4 +266,27 @@ public class readAndWrite {
         return infoList;
     }
 
+    /**
+     * This function finds user in-use at the time from tmp.txt file
+     * @file uses tmp.txt file which include user in-use
+     * @return username in string
+     */
+    public String getUsername (){
+
+        String username="";
+
+        try {
+            File path = context.getExternalFilesDir(null);
+            File file = new File(path, "tmp.txt");
+            int length = (int) file.length();
+            byte[] bytes = new byte[length];
+            FileInputStream in = new FileInputStream(file);
+            in.read(bytes);
+            in.close();
+            username = new String(bytes); //Username = contents
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return username;
+    }
 }

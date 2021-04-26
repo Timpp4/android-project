@@ -45,16 +45,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     LineChart mpLineChart;
     Button insert;
 
-
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View paramView = inflater.inflate(R.layout.fragment_home, container, false);
 
-        /**
-         * Tässä blokissa määritellään kuvaaja sekä kuvaajien tyylit
-         */
         mpLineChart = (LineChart) paramView.findViewById(R.id.chart);
         mpLineChart.getAxisLeft().setEnabled(false);
         mpLineChart.getAxisRight().setEnabled(false);
@@ -68,7 +64,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         insert = (Button) paramView.findViewById(R.id.btnInsertWeight);
         insert.setOnClickListener(this);
-        System.out.println("****** NAPIN PAINALLUS : " + insert.isPressed());
 
         Spinner spinner = paramView.findViewById(R.id.countrySpinner);
         ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(getActivity(),
@@ -76,6 +71,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         countryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(countryAdapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            /**
+             * This function listen spinner in HomeFragment and defines functions which are used
+             * when country is selected or not
+             */
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String yourBmi = refreshYourBmi();
@@ -101,12 +100,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         return paramView;
     }
 
-    @NotNull
-    private ArrayList<Entry> userBmiValues(@NotNull ArrayList<DataObject> dataObject, List<String> strings)
     /**
-     * Tässä aliohjelmassa luetaan käyttän painodata ja muunnetaan BMI:ksi BMI luokan avulla
+     * This function go through ArrayList dataObject and returns sorted user bmi values calculated by
+     * profile data as a ArrayList
+     * @param dataObject ArrayList which include date and weight as a parameters
+     * @param strings List which include profile data and this function get profile height from list
+     * @return Function return ArrayList userBmiVals
      */
-    {
+    @NotNull
+    private ArrayList<Entry> userBmiValues(@NotNull ArrayList<DataObject> dataObject, List<String> strings) {
         BmiCalculator bc = new BmiCalculator();
         ArrayList<Entry> userBmiVals = new ArrayList<Entry>();
         for (int i = 0; i < dataObject.size(); i++){
@@ -115,12 +117,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
         return userBmiVals;
     }
-    @NotNull
-    private ArrayList<Entry> userWeight(@NotNull ArrayList<DataObject> dataObject)
+
     /**
-     * Tässä aliohjelmassa luetaan käyttän painodata ja muunnetaan BMI:ksi BMI luokan avulla
+     * This function go through ArrayList dataObject and returns user weight in ArrayList
+     * @param dataObject is ArrayList which includes dates and weights inserted by user
+     * @return ArrayList of calculated bmis by user data
      */
-    {
+    @NotNull
+    private ArrayList<Entry> userWeight(@NotNull ArrayList<DataObject> dataObject) {
         ArrayList<Entry> userBmiVals = new ArrayList<Entry>();
         for (int i = 0; i < dataObject.size(); i++){
             userBmiVals.add(new Entry(i, (float) (dataObject.get(i).getWeight())));
@@ -128,20 +132,26 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         return userBmiVals;
     }
 
-    //Run dates from userdata and search country-specific average BMI from WHO API
-    @NotNull
-    private ArrayList<Entry> whoBmiConstant(int size, String[] avgBmi)
     /**
-     * Tässä aliohjelmassa ajetaan käyttäjätiedoista päivämäärät ja asetetaan WHO AthenaAPIsta
-     * vuoden ja sukupuolen mukaan haettu maakohtainen keskibmi
+     * This function make ArrayList from WHO Athena API response which is used to draw constant line
+     * in chart
+     * @param size Size of ArrayList <DataObject>
+     * @param avgBmi WHO Athena API response which include average BMI
+     * @return ArrayList of average bmis from WHO Athena API
      */
-    {
+    @NotNull
+    private ArrayList<Entry> whoBmiConstant(int size, String[] avgBmi) {
         ArrayList<Entry> whoBmiVals = new ArrayList<Entry>();
         for (int i = 0; i < size; i++){
             whoBmiVals.add(new Entry(i, Float.parseFloat(avgBmi[0])));
         }
         return whoBmiVals;
     }
+
+    /**
+     * This function defines user specific lines in functions and returns datasets
+     * @return DataSets which is used to draw lines to chart
+     */
     public ArrayList<ILineDataSet> userChartRefresh(){
 
         //Initializing the list for graphs
@@ -150,35 +160,41 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         readAndWrite rw = new readAndWrite(getContext());
 
         // Initializing BMI graphs and styles
-        LineDataSet lineDataSet1 = new LineDataSet(userBmiValues(rw.readUserData
+        LineDataSet userBmiDataSet = new LineDataSet(userBmiValues(rw.readUserData
                 (), rw.profileInfo()), "Oma BMI");
-        lineDataSet1.setLineWidth(2);
-        lineDataSet1.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
-        lineDataSet1.setDrawCircles(true);
-        lineDataSet1.setCircleColor(Color.BLACK);
-        lineDataSet1.setCircleHoleRadius(3f);
-        lineDataSet1.setColor(Color.MAGENTA);
-        lineDataSet1.setDrawFilled(true);
-        lineDataSet1.setFillColor(Color.MAGENTA);
-        lineDataSet1.setFillAlpha(30);
-        lineDataSet1.setValueTextSize(12f);
-        lineDataSet1.setValueTextColor(Color.GRAY);
-        dataSets.add(lineDataSet1);
+        userBmiDataSet.setLineWidth(2);
+        userBmiDataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
+        userBmiDataSet.setDrawCircles(true);
+        userBmiDataSet.setCircleColor(Color.BLACK);
+        userBmiDataSet.setCircleHoleRadius(3f);
+        userBmiDataSet.setColor(Color.MAGENTA);
+        userBmiDataSet.setDrawFilled(true);
+        userBmiDataSet.setFillColor(Color.MAGENTA);
+        userBmiDataSet.setFillAlpha(30);
+        userBmiDataSet.setValueTextSize(12f);
+        userBmiDataSet.setValueTextColor(Color.GRAY);
+        dataSets.add(userBmiDataSet);
 
-        LineDataSet lineDataSet3 = new LineDataSet(userWeight(rw.readUserData()), "Paino");
-        lineDataSet3.setColor(Color.GREEN);
-        lineDataSet3.setLineWidth(3f);
-        lineDataSet1.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
-        lineDataSet3.setDrawCircles(false);
-        lineDataSet3.setDrawValues(true);
-        lineDataSet3.setValueTextSize(12f);
-        lineDataSet3.setValueTextColor(Color.GRAY);
-        dataSets.add(lineDataSet3);
+        LineDataSet userWeightDataSet = new LineDataSet(userWeight(rw.readUserData()), "Paino");
+        userWeightDataSet.setColor(Color.GREEN);
+        userWeightDataSet.setLineWidth(3f);
+        userWeightDataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
+        userWeightDataSet.setDrawCircles(false);
+        userWeightDataSet.setDrawValues(true);
+        userWeightDataSet.setValueTextSize(12f);
+        userWeightDataSet.setValueTextColor(Color.GRAY);
+        dataSets.add(userWeightDataSet);
 
         return dataSets;
 
     }
 
+    /**
+     * This function return ArrayList whoBmiDataSet which include data for drawing constant line to
+     * line chart
+     * @param country is value from spinner
+     * @return whoBmiDataSet include data for drawing constant line
+     */
     public LineDataSet constantChartRefresh(String country){
         final String YEAR = "2016";
         CountriesAPI ca = new CountriesAPI();
@@ -201,16 +217,21 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         else{
             avgBmi[0] = bb.getBmiFromWho("Male", YEAR);
         }
-        LineDataSet lineDataSet2 = new LineDataSet(whoBmiConstant(rw.readUserData().size(), avgBmi), "Vertailu BMI");
-        lineDataSet2.setColor(Color.RED);
-        lineDataSet2.setLineWidth(5f);
-        lineDataSet2.setDrawCircles(false);
-        lineDataSet2.setDrawValues(true);
-        lineDataSet2.setValueTextSize(12f);
-        lineDataSet2.setValueTextColor(Color.GRAY);
-        return lineDataSet2;
+        LineDataSet whoBmiDataSet = new LineDataSet(whoBmiConstant(rw.readUserData().size(), avgBmi), "Vertailu BMI");
+        whoBmiDataSet.setColor(Color.RED);
+        whoBmiDataSet.setLineWidth(5f);
+        whoBmiDataSet.setDrawCircles(false);
+        whoBmiDataSet.setDrawValues(true);
+        whoBmiDataSet.setValueTextSize(12f);
+        whoBmiDataSet.setValueTextColor(Color.GRAY);
+        return whoBmiDataSet;
     }
 
+    /**
+     * This function define functions used if button labeled "Insert weight" is pressed. Function
+     * include also error handling
+     * @param view
+     */
     @Override
     public void onClick(View view) {
 
@@ -220,11 +241,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         readAndWrite rw = new readAndWrite(getContext());
         EditText insDate = getView().findViewById(R.id.textDate);
         String date = insDate.getText().toString();
-        System.out.println(dv.DateValidation(date));
-        System.out.println(date);
         EditText insWeight = getView().findViewById(R.id.textWeight);
         double weight = nv.doubleValidation(insWeight);
-        System.out.println(weight);
         if (dv.DateValidation(date) && 0 < weight && weight < 600){
             userBmiValues(rw.readUserData(), rw.profileInfo());
             rw.insertWeight(date, weight);
@@ -247,11 +265,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             insWeight.setError("Weight must be between 0 and 600!");
         }
     }
+
+    /**
+     * This function get users last weight from sorted (by date) ArrayList and returns it
+     * @return String value returned
+     */
     public String refreshYourBmi () {
         readAndWrite rw = new readAndWrite(getContext());
         ArrayList<Entry> vals = userBmiValues(rw.readUserData(), rw.profileInfo());
         float lastNode = vals.get(vals.size() - 1).getY();
-        System.out.println("****** LAST NODE: " + lastNode);
         @SuppressLint("DefaultLocale") String yourBmi = String.format("%.2f", lastNode);
         return yourBmi;
     }

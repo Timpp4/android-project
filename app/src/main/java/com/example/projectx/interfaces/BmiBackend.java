@@ -38,7 +38,6 @@ public class BmiBackend {
             InputStream inputFile = urlc.getInputStream();
             Document doc = builder.parse(inputFile);
             doc.getDocumentElement().normalize();
-            //System.out.println("ROOT ELEMENT: " + doc.getDocumentElement().getNodeName());
             NodeList nList = doc.getDocumentElement().getElementsByTagName("Fact");
             if (nList.getLength() == 0){
                 return false;
@@ -48,7 +47,6 @@ public class BmiBackend {
                 Node node = nList.item(i);
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     Element element = (Element) node;
-                    //ArrayList<String> theatreInfo = new ArrayList<String>();
                     String year = element.getElementsByTagName("YEAR").item(0).getTextContent();
                     String bmi = element.getElementsByTagName("Numeric").item(0).getTextContent();
                     String sex = element.getElementsByTagName("SEX").item(0).getTextContent();
@@ -56,7 +54,6 @@ public class BmiBackend {
                 }
             }
         } catch (ParserConfigurationException | IOException | SAXException e) {
-            System.out.println("************* ERROR   : ");
             e.printStackTrace();
         }
             return true;
