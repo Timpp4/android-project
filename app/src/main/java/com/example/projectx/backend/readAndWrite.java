@@ -243,7 +243,7 @@ public class readAndWrite {
             int arrayLength;
             int i = 0;
             arrayLength = line_parsed.length;
-            //Kommentti
+
             System.out.println(arrayLength);
             while (i < arrayLength) {
                 String row = line_parsed[i];
@@ -289,4 +289,83 @@ public class readAndWrite {
         }
         return username;
     }
+
+    public String displayData() {
+        String username = getUsername();
+        String profile_data="";
+        try {
+            File path = context.getExternalFilesDir(null);
+            File file = new File(path, username + ".txt");
+            int length = (int) file.length();
+            byte[] bytes = new byte[length];
+            FileInputStream in = new FileInputStream(file);
+            in.read(bytes);
+            in.close();
+            String contents = new String(bytes);
+
+            String[] line_parsed;
+            line_parsed = contents.split("\n"); // Row
+            int arrayLength;
+            int i = 0;
+            arrayLength = line_parsed.length;
+
+            while (i < arrayLength) {
+                profile_data = profile_data + i + " --- " + line_parsed[i] + "\n";
+                i++;
+            }
+
+        } catch (Exception e) {
+            System.out.println("vIRHE DISPLAYDATA() " + e);
+        }
+        return profile_data;
+    }
+
+    public String removeData(Integer id) {
+        String username = getUsername();
+        String profile_data="";
+        try {
+            File path = context.getExternalFilesDir(null);
+            File file = new File(path, username + ".txt");
+            int length = (int) file.length();
+            byte[] bytes = new byte[length];
+            FileInputStream in = new FileInputStream(file);
+            in.read(bytes);
+            in.close();
+            String contents = new String(bytes);
+
+            String[] line_parsed;
+            line_parsed = contents.split("\n"); // Row
+            int arrayLength;
+            int i = 0;
+            arrayLength = line_parsed.length;
+            boolean idBoolean = false;
+
+            while (i < arrayLength) {
+                if (i==0) {
+                    profile_data = profile_data + i + " --- " + line_parsed[i] + "\n";
+                } else if (id==i) {
+                    idBoolean = true;
+                } else if (id != i) {
+                    if (idBoolean == false) {
+                        profile_data = profile_data + i + " --- " + line_parsed[i] + "\n";
+                    } else {
+                        profile_data = profile_data + (i-1) + " --- " + line_parsed[i] + "\n";
+                    }
+                }
+                i++;
+            }
+
+        } catch (Exception e) {
+            System.out.println("vIRHE removedata() " + e);
+        }
+        return profile_data;
+
+
+
+
+    }
+
+
+
+
 }

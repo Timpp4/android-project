@@ -36,14 +36,16 @@ public class SettingsFragment extends Fragment {
         final boolean isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn", false);
 
 
-        /*// Check if dark mode is on
+
+
+        // Check if dark mode is on
         if (isDarkModeOn){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             btnToggle.setText("Disable night mode");
         }else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             btnToggle.setText("Enable night mode");
-        }*/
+        }
 
         // Toggle button logic. Change button text Enable/Disable
         btnToggle.setOnClickListener(new View.OnClickListener() {
@@ -54,19 +56,16 @@ public class SettingsFragment extends Fragment {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                     editor.putBoolean("isDarkModeOn", false);
                     editor.apply();
-
                     btnToggle.setText("Enable night mode");
                 }else{
 
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                     editor.putBoolean("isDarkModeOn", true);
                     editor.apply();
-
                     btnToggle.setText("Disable night mode");
                 }
             }
         });
-
         return v;
     }
 }

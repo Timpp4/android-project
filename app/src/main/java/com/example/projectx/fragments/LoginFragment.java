@@ -1,6 +1,8 @@
 package com.example.projectx.fragments;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -26,6 +28,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_login, container, false);
+
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sharedPreferences.edit();
+        //Creating dark mode state to sharedPreference memory
+        final boolean isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn", false);
+
         loginButton = (Button) v.findViewById(R.id.btn_signup);
         loginButton.setOnClickListener(this);
         return v;
@@ -46,7 +54,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
                 tv_pass.getText().toString()) == true) {
             // Start MainActivity after login information input
             if (view.getId() == loginButton.getId()) {
-                System.out.println("loginfragmentissa..........");
                 // MainActivity executes bottomNavigationBar fragment
                 Intent MainIntent = new Intent(getActivity(), MainActivity.class);
                 startActivity(MainIntent);

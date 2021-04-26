@@ -1,5 +1,7 @@
 package com.example.projectx.fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -36,6 +38,12 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_register, container, false);
+
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sharedPreferences.edit();
+        //Creating dark mode state to sharedPreference memory
+        final boolean isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn", false);
+
         signUpButton = (Button) v.findViewById(R.id.btn_signup);
         signUpButton.setOnClickListener(this);
         Spinner spinner = v.findViewById(R.id.et_sexSpinner);

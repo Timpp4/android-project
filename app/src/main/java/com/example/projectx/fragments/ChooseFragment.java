@@ -1,5 +1,7 @@
 package com.example.projectx.fragments;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -23,6 +25,12 @@ public class ChooseFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_choose, container, false);
+
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sharedPreferences.edit();
+        //Creating dark mode state to sharedPreference memory
+        final boolean isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn", false);
+
         logInButton = (Button) v.findViewById(R.id.btn_login);
         logInButton.setOnClickListener(this);
         signUpButton = (Button) v.findViewById(R.id.btn_sign);

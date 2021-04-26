@@ -18,7 +18,7 @@
 
     <EditText
         android:id="@+id/textDate"
-        android:layout_width="128dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
@@ -28,25 +28,24 @@
         android:layout_marginLeft="24dp"
         android:layout_marginTop="106dp"
         android:layout_marginEnd="259dp"
-        android:hint="12/02/2021"
+        android:hint="dd/mm/yyyy"
         android:inputType="date"
-        android:textSize="20dp" />
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/textWeight"
-        android:layout_width="60dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="303dp"
-        android:layout_marginLeft="303dp"
+        android:layout_marginStart="290dp"
         android:layout_marginTop="107dp"
-        android:layout_marginEnd="47dp"
-        android:hint="100"
+        android:layout_marginEnd="10dp"
+        android:hint="Insert kg:"
         android:inputType="numberDecimal"
-        android:textSize="20dp" />
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/btnInsertWeight"
@@ -68,7 +67,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         android:text="Your BMI"
-        android:textSize="25dp"
+        android:textSize="25sp"
         android:textStyle="bold" />
 
     <TextView
@@ -78,16 +77,17 @@
         android:layout_below="@id/bmiText"
         android:layout_centerHorizontal="true"
         android:hint="56,48 "
-        android:textSize="20dp" />
+        android:textSize="20sp" />
 
     <Spinner
         android:id="@+id/countrySpinner"
         android:layout_width="match_parent"
-        android:layout_height="59dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="584dp"
-        android:layout_marginBottom="88dp" />
+        android:layout_marginTop="550dp"
+        android:spinnerMode="dialog"
+        android:layout_marginBottom="80dp" />
 
 
 </RelativeLayout>
