@@ -6,14 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 
-import com.example.projectx.backend.readAndWrite;
 import com.example.projectx.fragments.HomeFragment;
 import com.example.projectx.fragments.InfoFragment;
 import com.example.projectx.fragments.LoginFragment;
@@ -41,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
     // Create BottomNavigationBar and fragments to application menu
     private BottomNavigationView.OnNavigationItemSelectedListener bottomNavigationMethod = new
             BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -49,8 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
                     Fragment fragment = null;
 
-                    switch (item.getItemId())
-                    {
+                    switch (item.getItemId()) {
                         case R.id.home:
                             fragment = new HomeFragment();
                             break;
@@ -68,11 +63,10 @@ public class MainActivity extends AppCompatActivity {
                             break;
                     }
 
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container,fragment).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
 
                     return true;
                 }
             };
-
 
 }

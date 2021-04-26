@@ -1,11 +1,10 @@
 package com.example.projectx.backend;
 
 public class PasswordValidator {
-
+    // Checks if password is valid
     public static boolean isValid(String password) {
         // Check password length
         if ((password.length() < 12)) {
-            System.out.println("Salasana on liian lyhyt");
             return false;
         }
 
@@ -24,7 +23,6 @@ public class PasswordValidator {
                 }
             }
             if (count == 0) {
-                System.out.println("Salasana ei sisällä numeroita");
                 return false;
             }
         }
@@ -40,7 +38,6 @@ public class PasswordValidator {
                 || password.contains(", ") || password.contains("<")
                 || password.contains(">") || password.contains("?")
                 || password.contains("|"))) {
-            System.out.println("Salasana ei sisällä erikoismerkkejä");
             return false;
         }
         // Check if includes capital letters
@@ -57,7 +54,6 @@ public class PasswordValidator {
             }
 
             if (count == 0) {
-                System.out.println("Salasana ei sisällä isoja kirjaimia");
                 return false;
             }
         }
@@ -77,7 +73,6 @@ public class PasswordValidator {
                 }
             }
             if (count == 0) {
-                System.out.println("Salasana ei sisällä pieniä kirjaimia");
                 return false;
             }
         }

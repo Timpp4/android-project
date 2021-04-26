@@ -44,7 +44,7 @@ public class LoginSignUp extends AppCompatActivity {
 
     }
 
-
+    // Method to navigate to login fragment
     public void navigateToLogin(){
         fragmentManager = getSupportFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();
@@ -58,7 +58,7 @@ public class LoginSignUp extends AppCompatActivity {
 
         ft.addToBackStack(null).commit();
     }
-
+    // Method to navigate to sign up fragment
     public void navigateToSignUp(){
         fragmentManager = getSupportFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();
