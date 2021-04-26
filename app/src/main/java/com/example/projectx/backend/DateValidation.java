@@ -11,13 +11,13 @@ import java.util.Date;
  */
 public class DateValidation {
 
+
     public boolean DateValidation(String date){
 
-        date = date.replaceAll("/", ".").replaceAll("-", ".");
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat testFormat = new SimpleDateFormat("dd.MM.yyyy");
-
         Date dateValidation = null;
+
         try{
             dateValidation = testFormat.parse(date);
         }catch (ParseException e){
@@ -25,5 +25,14 @@ public class DateValidation {
         }
         assert dateValidation != null;
         return testFormat.format(dateValidation).equals(date);
+    }
+
+    public String DateFormating (String date){
+
+        date = date.replaceAll("/", ".").replaceAll("-", ".");
+        if (date.charAt(1) == '.') date = "0" + date;
+        if (date.charAt(4) == '.') date = date.substring(0,3) + "0" + date.substring(3);
+
+        return date;
     }
 }

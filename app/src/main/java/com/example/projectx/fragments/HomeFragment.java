@@ -210,9 +210,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         readAndWrite rw = new readAndWrite(getContext());
         if(bb.whoRequest(ca.countriesRequest(country))){
             bb.whoRequest(ca.countriesRequest(country));
+            Toast.makeText(Objects.requireNonNull(getActivity()).getBaseContext(),
+                    "Country data downloaded successfully",
+                    Toast.LENGTH_LONG).show();
         }
         else{
             bb.whoRequest(ca.countriesRequest("FIN"));
+            Toast.makeText(Objects.requireNonNull(getActivity()).getBaseContext(),
+                    "Country not found from database! Finland data downloaded.",
+                    Toast.LENGTH_LONG).show();
         }
         // Initializing Comparison graph and styles
         final String[] avgBmi = {""};
@@ -249,6 +255,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         readAndWrite rw = new readAndWrite(getContext());
         EditText insDate = Objects.requireNonNull(getView()).findViewById(R.id.textDate);
         String date = insDate.getText().toString();
+        date = dv.DateFormating(date);
         EditText insWeight = getView().findViewById(R.id.textWeight);
         double weight = nv.doubleValidation(insWeight);
         if (dv.DateValidation(date) && 0 < weight && weight < 600){
@@ -267,7 +274,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             tv.setText(refreshYourBmi());
         }
         else if (!dv.DateValidation(date)) {
-            insDate.setError("Date isn't valid");
+            insDate.setError("Date isn't valid! Set date i.e 01.01.1990");
         }
         else if (weight < 0 || 600 < weight) {
             insWeight.setError("Weight must be between 0 and 600!");
