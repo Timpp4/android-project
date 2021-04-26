@@ -5,7 +5,7 @@ import java.util.Date;
 public class DataObject implements Comparable<DataObject> {
 
     private Date date;
-    private double weight;
+    private final double weight;
 
     /**
      * This function defines DataObject which is used to make ArrayList from weight data inserted by user

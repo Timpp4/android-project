@@ -25,9 +25,9 @@ import javax.xml.parsers.ParserConfigurationException;
  */
 public class CountriesAPI {
     /**
-     *
-     * @param country
-     * @return
+     * This function makes request from Countries API and gets alpha 3 code from source
+     * @param country pass country name from spinner to function
+     * @return alpha 3 code of a contry as string
      */
     public String countriesRequest (String country) {
         String returnString = "";
@@ -55,8 +55,8 @@ public class CountriesAPI {
     }
 
     /**
-     *
-     * @return
+     * This function makes ArrayList from countries which is used in HomeFragment spinner
+     * @return ArrayList which includes countries
      */
     public ArrayList<String> countryList(){
         Locale[] locales = Locale.getAvailableLocales();

@@ -239,7 +239,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         NumberValidation nv = new NumberValidation(test);
         DateValidation dv = new DateValidation();
         readAndWrite rw = new readAndWrite(getContext());
-        EditText insDate = getView().findViewById(R.id.textDate);
+        EditText insDate = Objects.requireNonNull(getView()).findViewById(R.id.textDate);
         String date = insDate.getText().toString();
         EditText insWeight = getView().findViewById(R.id.textWeight);
         double weight = nv.doubleValidation(insWeight);
