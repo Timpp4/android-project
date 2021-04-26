@@ -20,13 +20,17 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 /**
- * Tämä luokka hakee tietoa WHOn Athena APIsta, jossa on keskimääräiset BMIt vuosittain maan ja
- * sukupuolen mukaan.
+ *
  */
 /*https://apps.who.int/gho/athena/api/GHO/NCD_BMI_MEAN.json?filter=COUNTRY:FIN&profile=simple*/
 public class BmiBackend {
-    ArrayList<BmiObject> bmiData = new ArrayList<BmiObject>();
 
+    ArrayList<BmiObject> bmiData = new ArrayList<BmiObject>();
+    /**
+     *
+     * @param country
+     * @return
+     */
     public boolean whoRequest (String country) {
         try {
             String requestUrl = "https://apps.who.int/gho/athena/api/GHO/NCD_BMI_MEAN.xml?filter=COUNTRY"+country+"&profile=simple";
@@ -58,6 +62,13 @@ public class BmiBackend {
         }
             return true;
     }
+
+    /**
+     *
+     * @param sex
+     * @param year
+     * @return
+     */
     public String getBmiFromWho(String sex, String year){
         String avgBmiByYear = null;
         for (int i = 0; i < bmiData.size(); i++){

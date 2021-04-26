@@ -20,11 +20,18 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+/**
+ *
+ */
 public class CountriesAPI {
+    /**
+     *
+     * @param country
+     * @return
+     */
     public String countriesRequest (String country) {
         String returnString = "";
         try {
-            DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             String requestUrl = "https://restcountries.eu/rest/v2/name/"+country+"?fields=alpha3Code";
             System.out.println(requestUrl);
             URL url = new URL(requestUrl);
@@ -41,12 +48,16 @@ public class CountriesAPI {
                     .replaceAll("\\}", "").replaceAll("\"", "")
                     .replaceAll("alpha3Code", "");
 
-        } catch (ParserConfigurationException | IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return returnString;
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<String> countryList(){
         Locale[] locales = Locale.getAvailableLocales();
         ArrayList<String> countries = new ArrayList<String>();
