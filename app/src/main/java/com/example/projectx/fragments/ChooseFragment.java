@@ -13,7 +13,7 @@ import android.widget.Button;
 import com.example.projectx.LoginSignUp;
 import com.example.projectx.R;
 
-
+// This class handling login fragments
 public class ChooseFragment extends Fragment implements View.OnClickListener {
 
     private Button signUpButton;
