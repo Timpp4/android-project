@@ -338,12 +338,19 @@ public class readAndWrite {
             int arrayLength;
             int i = 0;
             arrayLength = line_parsed.length;
+            boolean idBoolean = false;
 
             while (i < arrayLength) {
                 if (i==0) {
                     profile_data = profile_data + i + " --- " + line_parsed[i] + "\n";
+                } else if (id==i) {
+                    idBoolean = true;
                 } else if (id != i) {
-                    profile_data = profile_data + i + " --- " + line_parsed[i] + "\n";
+                    if (idBoolean == false) {
+                        profile_data = profile_data + i + " --- " + line_parsed[i] + "\n";
+                    } else {
+                        profile_data = profile_data + (i-1) + " --- " + line_parsed[i] + "\n";
+                    }
                 }
                 i++;
             }
