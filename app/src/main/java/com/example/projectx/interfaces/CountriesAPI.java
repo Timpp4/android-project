@@ -33,7 +33,6 @@ public class CountriesAPI {
         String returnString = "";
         try {
             String requestUrl = "https://restcountries.eu/rest/v2/name/"+country+"?fields=alpha3Code";
-            System.out.println(requestUrl);
             URL url = new URL(requestUrl);
             BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()));
             String inputFromApi;
