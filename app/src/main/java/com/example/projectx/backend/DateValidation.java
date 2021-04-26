@@ -23,6 +23,7 @@ public class DateValidation {
         }catch (ParseException e){
             return false;
         }
+        assert dateValidation != null;
         return testFormat.format(dateValidation).equals(date);
     }
 }

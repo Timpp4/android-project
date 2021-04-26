@@ -20,11 +20,18 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+/**
+ *
+ */
 public class CountriesAPI {
+    /**
+     * This function makes request from Countries API and gets alpha 3 code from source
+     * @param country pass country name from spinner to function
+     * @return alpha 3 code of a contry as string
+     */
     public String countriesRequest (String country) {
         String returnString = "";
         try {
-            DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             String requestUrl = "https://restcountries.eu/rest/v2/name/"+country+"?fields=alpha3Code";
             System.out.println(requestUrl);
             URL url = new URL(requestUrl);
@@ -41,12 +48,16 @@ public class CountriesAPI {
                     .replaceAll("\\}", "").replaceAll("\"", "")
                     .replaceAll("alpha3Code", "");
 
-        } catch (ParserConfigurationException | IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return returnString;
     }
 
+    /**
+     * This function makes ArrayList from countries which is used in HomeFragment spinner
+     * @return ArrayList which includes countries
+     */
     public ArrayList<String> countryList(){
         Locale[] locales = Locale.getAvailableLocales();
         ArrayList<String> countries = new ArrayList<String>();
