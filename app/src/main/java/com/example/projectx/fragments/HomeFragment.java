@@ -51,7 +51,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
 
         View paramView = inflater.inflate(R.layout.fragment_home, container, false);
-        testi (paramView);
+        testi(paramView);
         /**
          * Tässä blokissa määritellään kuvaaja sekä kuvaajien tyylit
          */
@@ -145,9 +145,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         return whoBmiVals;
     }
     public ArrayList<ILineDataSet> userChartRefresh(){
-
-        BmiBackend bb = new BmiBackend();
-
 
         //Initializing the list for graphs
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();
@@ -252,9 +249,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
     }
     @SuppressLint("SetTextI18n")
-    public void testi(View view) {
-        //TODO: Lisää viimeisin arvo TextViewiin
+    public void testi (View view) {
+        readAndWrite rw = new readAndWrite(getContext());
+        ArrayList<Entry> vals = userBmiValues(rw.readUserData(), rw.profileInfo());
+        float lastNode = vals.get(vals.size() - 1).getY();
+        @SuppressLint("DefaultLocale") String yourBmi = String.format("%.2f", lastNode);
         TextView tv = (TextView) view.findViewById(R.id.lastBmi);
-        tv.setText("text");
+        tv.setText(yourBmi);
     }
 }
