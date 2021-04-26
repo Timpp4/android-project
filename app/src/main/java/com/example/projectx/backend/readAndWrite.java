@@ -243,7 +243,7 @@ public class readAndWrite {
             int arrayLength;
             int i = 0;
             arrayLength = line_parsed.length;
-            //Kommentti
+
             System.out.println(arrayLength);
             while (i < arrayLength) {
                 String row = line_parsed[i];

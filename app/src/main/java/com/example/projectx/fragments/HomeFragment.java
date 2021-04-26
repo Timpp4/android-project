@@ -1,6 +1,8 @@
 package com.example.projectx.fragments;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -51,6 +53,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         View paramView = inflater.inflate(R.layout.fragment_home, container, false);
 
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sharedPreferences.edit();
+        //Creating dark mode state to sharedPreference memory
+        final boolean isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn", false);
+
         mpLineChart = (LineChart) paramView.findViewById(R.id.chart);
         mpLineChart.getAxisLeft().setEnabled(false);
         mpLineChart.getAxisRight().setEnabled(false);
@@ -70,6 +77,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 android.R.layout.simple_spinner_item, ca.countryList());
         countryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(countryAdapter);
+        spinner.setPrompt("Choose your country");
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             /**
              * This function listen spinner in HomeFragment and defines functions which are used
