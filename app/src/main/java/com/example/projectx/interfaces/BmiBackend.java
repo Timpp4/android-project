@@ -20,16 +20,17 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 /**
- *
+ * This class operates as interface to WHO Athena API
  */
 /*https://apps.who.int/gho/athena/api/GHO/NCD_BMI_MEAN.json?filter=COUNTRY:FIN&profile=simple*/
 public class BmiBackend {
 
     ArrayList<BmiObject> bmiData = new ArrayList<BmiObject>();
     /**
-     *
-     * @param country
-     * @return
+     * This function makes request to WHO Athena API and uses country to define which data will be
+     * requested from the source
+     * @param country is alpha 3 code for country which defines filter for request url
+     * @return boolean true if country exist in database and if not function return false
      */
     public boolean whoRequest (String country) {
         try {
@@ -64,16 +65,20 @@ public class BmiBackend {
     }
 
     /**
-     *
-     * @param sex
-     * @param year
-     * @return
+     * This function extracts average bmi from ArrayList bmiData by users sex and year
+     * @param sex users sex defined in string
+     * @param year predefined year in string
+     * @return average bmi in string
      */
     public String getBmiFromWho(String sex, String year){
+
         String avgBmiByYear = null;
+
         for (int i = 0; i < bmiData.size(); i++){
+
             if (bmiData.get(i).getYear().equals(year) && bmiData.get(i).getSex().equals(sex))
                 avgBmiByYear = (bmiData.get(i).getBmi());
+
         }
         return avgBmiByYear;
     }
