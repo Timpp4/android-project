@@ -6,6 +6,9 @@ public class BmiObject {
 	private String bmi;
 	private String sex;
 
+	/**
+	 * This function defines BmiObject which is used to make ArrayList from calculated bmis
+	 */
 	public BmiObject(String year, String bmi, String sex) {
 		this.year = year;
 		this.bmi = bmi;
@@ -24,6 +27,10 @@ public class BmiObject {
 		return year;
 	}
 
+	/**
+	 * This function override toString method for DataObject
+	 * @return values in string
+	 */
 	@Override
 	public String toString() {
 		return "BmiObject{" +

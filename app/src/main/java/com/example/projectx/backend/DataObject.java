@@ -7,11 +7,18 @@ public class DataObject implements Comparable<DataObject> {
     private Date date;
     private double weight;
 
+    /**
+     * This function defines DataObject which is used to make ArrayList from weight data inserted by user
+     */
     public DataObject(Date date, double weight) {
         this.date = date;
         this.weight = weight;
     }
 
+    /**
+     * This function override toString method for DataObject
+     * @return values in string
+     */
     @Override
     public String toString() {
         return "DataObject{" +

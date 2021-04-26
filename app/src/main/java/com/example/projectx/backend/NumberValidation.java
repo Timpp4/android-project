@@ -1,7 +1,10 @@
 package com.example.projectx.backend;
 
 import android.widget.EditText;
-
+/**
+ * This class validates number inputs given by user and includes error handling in if statements
+ * which prevent application to crash
+ */
 public class NumberValidation {
     EditText test;
     public NumberValidation(EditText test) {
