@@ -41,6 +41,8 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
 
         return v;
     }
+
+    // Remove user selected data item
     @Override
     public void onClick(View view) {
         if (view.getId() == submit.getId()) {
@@ -50,12 +52,6 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
             System.out.println(tvId.getText().toString());
             int id = Integer.parseInt(tvId.getText().toString());
             tvData.setText(rw.removeData(id));
-
-
-
-
-
-
         }
     }
 
