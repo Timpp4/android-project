@@ -51,7 +51,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
 
         View paramView = inflater.inflate(R.layout.fragment_home, container, false);
-        testi(paramView);
+
         /**
          * Tässä blokissa määritellään kuvaaja sekä kuvaajien tyylit
          */
@@ -61,9 +61,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         mpLineChart.getDescription().setEnabled(false);
         mpLineChart.getXAxis().setDrawGridLines(false);
         mpLineChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
-
-
-
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -81,6 +78,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String yourBmi = refreshYourBmi();
+                TextView tv = getView().findViewById(R.id.lastBmi);
+                tv.setText(yourBmi);
                 mpLineChart.invalidate();
                 mpLineChart.clear();
                 ArrayList<ILineDataSet> dataSets = new ArrayList<>();
@@ -98,13 +98,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
             }
         });
-        String test = spinner.getSelectedItem().toString();
-        System.out.println("************************ TÄMÄ ON userChartRefresh **************" +test);
         return paramView;
     }
 
     @NotNull
-    private ArrayList<Entry> userBmiValues(ArrayList<DataObject> dataObject, List<String> strings)
+    private ArrayList<Entry> userBmiValues(@NotNull ArrayList<DataObject> dataObject, List<String> strings)
     /**
      * Tässä aliohjelmassa luetaan käyttän painodata ja muunnetaan BMI:ksi BMI luokan avulla
      */
@@ -118,7 +116,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         return userBmiVals;
     }
     @NotNull
-    private ArrayList<Entry> userWeight(ArrayList<DataObject> dataObject)
+    private ArrayList<Entry> userWeight(@NotNull ArrayList<DataObject> dataObject)
     /**
      * Tässä aliohjelmassa luetaan käyttän painodata ja muunnetaan BMI:ksi BMI luokan avulla
      */
@@ -220,7 +218,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         NumberValidation nv = new NumberValidation(test);
         DateValidation dv = new DateValidation();
         readAndWrite rw = new readAndWrite(getContext());
-        BmiCalculator bv = new BmiCalculator();
         EditText insDate = getView().findViewById(R.id.textDate);
         String date = insDate.getText().toString();
         System.out.println(dv.DateValidation(date));
@@ -240,6 +237,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             Toast.makeText(Objects.requireNonNull(getActivity()).getBaseContext(),
                     "Choose country to compare average BMI!",
                     Toast.LENGTH_LONG).show();
+            TextView tv = getView().findViewById(R.id.lastBmi);
+            tv.setText(refreshYourBmi());
         }
         else if (!dv.DateValidation(date)) {
             insDate.setError("Date isn't valid");
@@ -248,13 +247,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             insWeight.setError("Weight must be between 0 and 600!");
         }
     }
-    @SuppressLint("SetTextI18n")
-    public void testi (View view) {
+    public String refreshYourBmi () {
         readAndWrite rw = new readAndWrite(getContext());
         ArrayList<Entry> vals = userBmiValues(rw.readUserData(), rw.profileInfo());
         float lastNode = vals.get(vals.size() - 1).getY();
+        System.out.println("****** LAST NODE: " + lastNode);
         @SuppressLint("DefaultLocale") String yourBmi = String.format("%.2f", lastNode);
-        TextView tv = (TextView) view.findViewById(R.id.lastBmi);
-        tv.setText(yourBmi);
+        return yourBmi;
     }
 }
