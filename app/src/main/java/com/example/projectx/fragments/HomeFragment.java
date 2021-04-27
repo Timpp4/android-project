@@ -58,7 +58,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         //Creating dark mode state to sharedPreference memory
         final boolean isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn", false);
 
-        mpLineChart = (LineChart) paramView.findViewById(R.id.chart);
+        mpLineChart = paramView.findViewById(R.id.chart);
         mpLineChart.getAxisLeft().setEnabled(false);
         mpLineChart.getAxisRight().setEnabled(false);
         mpLineChart.getDescription().setEnabled(false);
@@ -69,11 +69,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         StrictMode.setThreadPolicy(policy);
         CountriesAPI ca = new CountriesAPI();
 
-        insert = (Button) paramView.findViewById(R.id.btnInsertWeight);
+        insert = paramView.findViewById(R.id.btnInsertWeight);
         insert.setOnClickListener(this);
 
         Spinner spinner = paramView.findViewById(R.id.countrySpinner);
-        ArrayAdapter<String> countryAdapter = new ArrayAdapter<String>(getActivity(),
+        ArrayAdapter<String> countryAdapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_spinner_item, ca.countryList());
         countryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(countryAdapter);
@@ -86,11 +86,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String yourBmi = refreshYourBmi();
-                TextView tv = Objects.requireNonNull(getView()).findViewById(R.id.lastBmi);
+                TextView tv = paramView.findViewById(R.id.lastBmi);
                 tv.setText(yourBmi);
                 mpLineChart.invalidate();
                 mpLineChart.clear();
-                ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+                ArrayList<ILineDataSet> dataSets;
                 String country = ca.countryList().get(position);
                 dataSets = userChartRefresh();
                 dataSets.add(constantChartRefresh(country));
@@ -118,7 +118,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @NotNull
     private ArrayList<Entry> userBmiValues(@NotNull ArrayList<DataObject> dataObject, List<String> strings) {
         BmiCalculator bc = new BmiCalculator();
-        ArrayList<Entry> userBmiVals = new ArrayList<Entry>();
+        ArrayList<Entry> userBmiVals = new ArrayList<>();
         for (int i = 0; i < dataObject.size(); i++){
             userBmiVals.add(new Entry(i, (float) bc.calculateBmi(dataObject.get(i).getWeight(),
                     Double.parseDouble(strings.get(1)))));
@@ -133,7 +133,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
      */
     @NotNull
     private ArrayList<Entry> userWeight(@NotNull ArrayList<DataObject> dataObject) {
-        ArrayList<Entry> userBmiVals = new ArrayList<Entry>();
+        ArrayList<Entry> userBmiVals = new ArrayList<>();
         for (int i = 0; i < dataObject.size(); i++){
             userBmiVals.add(new Entry(i, (float) (dataObject.get(i).getWeight())));
         }
@@ -149,7 +149,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
      */
     @NotNull
     private ArrayList<Entry> whoBmiConstant(int size, String[] avgBmi) {
-        ArrayList<Entry> whoBmiVals = new ArrayList<Entry>();
+        ArrayList<Entry> whoBmiVals = new ArrayList<>();
         for (int i = 0; i < size; i++){
             whoBmiVals.add(new Entry(i, Float.parseFloat(avgBmi[0])));
         }
@@ -244,7 +244,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     /**
      * This function define functions used if button labeled "Insert weight" is pressed. Function
      * include also error handling
-     * @param view
+     * @param view v
      */
     @Override
     public void onClick(View view) {
@@ -262,7 +262,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             userBmiValues(rw.readUserData(), rw.profileInfo());
             rw.insertWeight(date, weight);
             rw.readUserData();
-            ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+            ArrayList<ILineDataSet> dataSets;
             dataSets = userChartRefresh();
             LineData data = new LineData(dataSets);
             mpLineChart.setData(data);
