@@ -33,12 +33,9 @@ public class SettingsFragment extends Fragment {
         btnToggle = v.findViewById(R.id.btnToggle);
 
         SharedPreferences sharedPreferences = Objects.requireNonNull(this.getActivity()).getSharedPreferences("prefs", Context.MODE_PRIVATE);
-        final SharedPreferences.Editor editor = sharedPreferences.edit();
+        @SuppressLint("CommitPrefEdits") final SharedPreferences.Editor editor = sharedPreferences.edit();
         //Creating dark mode state to sharedPreference memory
         final boolean isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn", false);
-
-
-
 
         // Check if dark mode is on
         if (isDarkModeOn){
