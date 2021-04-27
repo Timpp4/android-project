@@ -28,11 +28,13 @@ public class DateValidation {
     }
 
     public String DateFormating (String date){
-
-        date = date.replaceAll("/", ".").replaceAll("-", ".");
-        if (date.charAt(1) == '.') date = "0" + date;
-        if (date.charAt(4) == '.') date = date.substring(0,3) + "0" + date.substring(3);
-
+        try {
+            date = date.replaceAll("/", ".").replaceAll("-", ".");
+            if (date.charAt(1) == '.') date = "0" + date;
+            if (date.charAt(4) == '.') date = date.substring(0,3) + "0" + date.substring(3);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return date;
     }
 }
