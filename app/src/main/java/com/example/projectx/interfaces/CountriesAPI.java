@@ -1,24 +1,13 @@
 package com.example.projectx.interfaces;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Locale;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 
 /**
  *
@@ -33,7 +22,6 @@ public class CountriesAPI {
         String returnString = "";
         try {
             String requestUrl = "https://restcountries.eu/rest/v2/name/"+country+"?fields=alpha3Code";
-            System.out.println(requestUrl);
             URL url = new URL(requestUrl);
             BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()));
             String inputFromApi;

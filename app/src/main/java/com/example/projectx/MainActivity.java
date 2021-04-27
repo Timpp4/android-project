@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.a_navigation_layout);
 
         ActionBar actionBar = getSupportActionBar();
-        assert actionBar != null;
         actionBar.hide();
 
 
@@ -38,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Create BottomNavigationBar and fragments to application menu
-    private final BottomNavigationView.OnNavigationItemSelectedListener bottomNavigationMethod = new
+    private BottomNavigationView.OnNavigationItemSelectedListener bottomNavigationMethod = new
             BottomNavigationView.OnNavigationItemSelectedListener() {
                 @SuppressLint("NonConstantResourceId")
                 @Override
@@ -64,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
                             break;
                     }
 
-                    assert fragment != null;
                     getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
 
                     return true;

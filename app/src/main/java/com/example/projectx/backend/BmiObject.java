@@ -2,9 +2,9 @@ package com.example.projectx.backend;
 
 public class BmiObject {
 
-	private String year;
-	private String bmi;
-	private String sex;
+	private final String year;
+	private final String bmi;
+	private final String sex;
 
 	/**
 	 * This function defines BmiObject which is used to make ArrayList from calculated bmis

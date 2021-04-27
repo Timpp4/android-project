@@ -273,7 +273,7 @@ public class readAndWrite {
      */
     public String displayData() {
         String username = getUsername();
-        String profile_data="";
+        StringBuilder profile_data= new StringBuilder();
         try {
             File path = context.getExternalFilesDir(null);
             File file = new File(path, username + ".txt");
@@ -289,13 +289,14 @@ public class readAndWrite {
             int i = 0;
             arrayLength = line_parsed.length;
             while (i < arrayLength) {
-                profile_data = profile_data + i + " --- " + line_parsed[i] + "\n";
+                //profile_data = profile_data + i + " --- " + line_parsed[i] + "\n";
+                profile_data.append(i).append(" --- ").append(line_parsed[i]).append("\n");
                 i++;
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return profile_data;
+        return profile_data.toString();
     }
 
     /**
@@ -305,8 +306,8 @@ public class readAndWrite {
      */
     public String removeData(Integer id) {
         String username = getUsername();
-        String profile_data="";
-        String profile_data_toFile="";
+        StringBuilder profile_data= new StringBuilder();
+        StringBuilder profile_data_toFile= new StringBuilder();
         try {
             File path = context.getExternalFilesDir(null);
             File file = new File(path, username + ".txt");
@@ -324,27 +325,26 @@ public class readAndWrite {
             boolean idBoolean = false;
             while (i < arrayLength) {
                 if (i==0) {
-                    profile_data = profile_data + i + " --- " + line_parsed[i] + "\n";
-                    profile_data_toFile = profile_data_toFile + line_parsed[i] + "\n";
+                    profile_data.append(i).append(" --- ").append(line_parsed[i]).append("\n");
+                    profile_data_toFile.append(line_parsed[i]).append("\n");
                 } else if (id==i) {
                     idBoolean = true;
                 } else if (id != i) {
-                    profile_data_toFile = profile_data_toFile + line_parsed[i] + "\n";
+                    profile_data_toFile.append(line_parsed[i]).append("\n");
                     if (!idBoolean) {
-                        profile_data = profile_data + i + " --- " + line_parsed[i] + "\n";
+                        profile_data.append(i).append(" --- ").append(line_parsed[i]).append("\n");
                     } else {
-                        profile_data = profile_data + (i-1) + " --- " + line_parsed[i] + "\n";
+                        profile_data.append(i - 1).append(" --- ").append(line_parsed[i]).append("\n");
                     }
                 }
                 i++;
             }
-            File fileNew = new File(path, username + ".txt");
             FileOutputStream stream = new FileOutputStream(file);
-            stream.write(profile_data_toFile.getBytes());
+            stream.write(profile_data_toFile.toString().getBytes());
             stream.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return profile_data;
+        return profile_data.toString();
     }
 }
