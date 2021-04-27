@@ -46,11 +46,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view.getId() == logOutButton.getId()) {
-            getActivity().finish();
+            Objects.requireNonNull(getActivity()).finish();
         }
     }
 
     // Update profile information
+    @SuppressLint("SetTextI18n")
     public void update(View view) {
         readAndWrite rw = new readAndWrite(getContext());
         List<String> infoList = new ArrayList<String>();
