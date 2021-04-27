@@ -16,7 +16,7 @@ public class DateValidation {
 
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat testFormat = new SimpleDateFormat("dd.MM.yyyy");
-        Date dateValidation = null;
+        Date dateValidation;
 
         try{
             dateValidation = testFormat.parse(date);

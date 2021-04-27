@@ -17,7 +17,6 @@ import android.widget.TextView;
 import com.example.projectx.R;
 import com.example.projectx.backend.readAndWrite;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -51,10 +50,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     }
 
     // Update profile information
-    @SuppressLint("SetTextI18n")
     public void update(View view) {
         readAndWrite rw = new readAndWrite(getContext());
-        List<String> infoList = new ArrayList<String>();
+        List<String> infoList;
         infoList = rw.profileInfo();
         TextView tv1 = view.findViewById(R.id.profile_username);
         TextView tv2 = view.findViewById(R.id.profile_weight);
@@ -62,10 +60,14 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         TextView tv4 = view.findViewById(R.id.profile_yearBorn);
         TextView tv5 = view.findViewById(R.id.profile_sex);
         tv1.setText(infoList.get(0)); //username
-        tv2.setText("Weight: " + infoList.get(4) + " kg"); //weight
-        tv3.setText("Height: " + infoList.get(1) + " cm"); //height
-        tv4.setText("Year of birth: " + infoList.get(2)); //yearBorn
-        tv5.setText("Gender: " + infoList.get(3)); //sex
+        String weight = "Weight: " + infoList.get(4) + " kg";
+        tv2.setText(weight); //weight
+        String height = "Height: " + infoList.get(1) + " cm";
+        tv3.setText(height); //height
+        String yearBorn = "Year of birth: " + infoList.get(2);
+        tv4.setText(yearBorn); //yearBorn
+        String gender = "Gender: " + infoList.get(3);
+        tv5.setText(gender); //sex
     }
 }
 
