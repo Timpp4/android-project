@@ -25,7 +25,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
 
     Button loginButton;
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
@@ -34,39 +33,31 @@ public class LoginFragment extends Fragment implements View.OnClickListener{
 
         SharedPreferences sharedPreferences = Objects.requireNonNull(this.getActivity()).getSharedPreferences("prefs", Context.MODE_PRIVATE);
         @SuppressLint("CommitPrefEdits") final SharedPreferences.Editor editor = sharedPreferences.edit();
-        //Creating dark mode state to sharedPreference memory
+        // Creating dark mode state to sharedPreference memory
         final boolean isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn", false);
 
-        loginButton = (Button) v.findViewById(R.id.btn_signup);
+        loginButton = v.findViewById(R.id.btn_signup);
         loginButton.setOnClickListener(this);
         return v;
     }
-
 
     @Override
     public void onClick(View view) {
         readAndWrite rw = new readAndWrite(getContext());
 
         EditText tv_user = getView().findViewById(R.id.et_email);
-        System.out.println(tv_user.getText().toString());
-
         EditText tv_pass = getView().findViewById(R.id.et_password);
-        System.out.println(tv_pass.getText().toString());
 
         if (rw.readFile(tv_user.getText().toString(),
-                tv_pass.getText().toString()) == true) {
+                tv_pass.getText().toString())) {
             // Start MainActivity after login information input
             if (view.getId() == loginButton.getId()) {
                 // MainActivity executes bottomNavigationBar fragment
                 Intent MainIntent = new Intent(getActivity(), MainActivity.class);
                 startActivity(MainIntent);
-
             }
-
-        }else {
+        } else {
             tv_pass.setError("Username or password did not match!");
         }
-
     }
-
 }
