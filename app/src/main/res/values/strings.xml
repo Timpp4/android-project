@@ -31,4 +31,11 @@
     <string name="insert_kg">Insert kg:</string>
     <string name="insert_weight">Insert weight</string>
     <string name="your_bmi">Your BMI</string>
+    <string name="log_out">Log out</string>
+    <string name="enable_night_mode">Enable night mode</string>
+    <string name="settings">Settings</string>
+    <string name="password">Password</string>
+    <string name="height">Height</string>
+    <string name="weight">Weight</string>
+    <string name="year_of_born_i_e_1997">Year of born i.e 1997</string>
 </resources>
