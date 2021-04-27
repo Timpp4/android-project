@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -19,18 +18,19 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private BottomNavigationView bottomNavigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.a_navigation_layout);
 
         ActionBar actionBar = getSupportActionBar();
-        assert actionBar != null;
         actionBar.hide();
 
 
         getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).add(R.id.container, new LoginFragment()).commit();
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
+        bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(bottomNavigationMethod);
         getSupportFragmentManager().beginTransaction().replace(R.id.container, new HomeFragment()).commit();
 
@@ -38,9 +38,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Create BottomNavigationBar and fragments to application menu
-    private final BottomNavigationView.OnNavigationItemSelectedListener bottomNavigationMethod = new
+    private BottomNavigationView.OnNavigationItemSelectedListener bottomNavigationMethod = new
             BottomNavigationView.OnNavigationItemSelectedListener() {
-                @SuppressLint("NonConstantResourceId")
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
@@ -64,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
                             break;
                     }
 
-                    assert fragment != null;
                     getSupportFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
 
                     return true;
