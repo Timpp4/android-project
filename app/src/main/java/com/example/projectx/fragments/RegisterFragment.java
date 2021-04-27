@@ -25,16 +25,9 @@ import com.example.projectx.backend.readAndWrite;
 import java.util.Objects;
 
 
-//vanha
-public class RegisterFragment extends Fragment implements View.OnClickListener{
-//public class RegisterFragment extends Fragment {
+public class RegisterFragment extends Fragment implements View.OnClickListener {
 
     public Button signUpButton;
-    Spinner spinner;
-    public View paramView;
-
-
-
 
     @Nullable
     @Override
@@ -43,58 +36,39 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
 
         SharedPreferences sharedPreferences = Objects.requireNonNull(this.getActivity()).getSharedPreferences("prefs", Context.MODE_PRIVATE);
         @SuppressLint("CommitPrefEdits") final SharedPreferences.Editor editor = sharedPreferences.edit();
-        //Creating dark mode state to sharedPreference memory
+        // Creating dark mode state to sharedPreference memory
         final boolean isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn", false);
 
-        signUpButton = (Button) v.findViewById(R.id.btn_signup);
+        signUpButton = v.findViewById(R.id.btn_signup);
         signUpButton.setOnClickListener(this);
         Spinner spinner = v.findViewById(R.id.et_sexSpinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
                 R.array.genders_array, android.R.layout.simple_spinner_item);
-
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         return v;
     }
 
-
     @Override
     public void onClick(View view) {
-
         EditText test = null;
-
         readAndWrite rw = new readAndWrite(getContext());
         NumberValidation nv = new NumberValidation(test);
 
         EditText tv_user = getView().findViewById(R.id.et_username);
-        System.out.println(tv_user.getText().toString());
-
         EditText tv_pass = getView().findViewById(R.id.et_password);
         String password = tv_pass.getText().toString();
         if (!PasswordValidator.isValid(password)){
             password = "";
         }
-        System.out.println(tv_pass.getText().toString());
-
         EditText tv_height = getView().findViewById(R.id.et_height);
-        System.out.println(tv_height.getText().toString());
         double height = nv.doubleValidation(tv_height);
-        System.out.println(height);
-
         EditText tv_weight = getView().findViewById(R.id.et_weight);
-        System.out.println(tv_weight.getText().toString());
-        //double weight = Double.valueOf(tv_weight.getText().toString());
         double weight = nv.doubleValidation(tv_weight);
-        System.out.println(weight);
-
         EditText tv_age = getView().findViewById(R.id.et_age);
-        System.out.println(tv_weight.getText().toString());
         int age = nv.integerValidation(tv_age);
-        System.out.println(age);
-
-        Spinner tv_sex = (Spinner) getView().findViewById(R.id.et_sexSpinner);
+        Spinner tv_sex = getView().findViewById(R.id.et_sexSpinner);
         String gender = tv_sex.getSelectedItem().toString();
-        System.out.println(gender);
 
         if (rw.createNewUser(tv_user.getText().toString(),
                 password,
@@ -105,8 +79,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
 
             if (view.getId() == signUpButton.getId()) {
                 ((LoginSignUp) getActivity()).navigateToLogin();
-                System.out.println("pääohjelmassa true, siirry kirjautumiseen");
-
             }
 
         }
@@ -115,8 +87,6 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
         }
         else if (tv_pass.getText().toString() == null || !PasswordValidator.isValid(tv_pass.getText().toString())) {
             tv_pass.setError("Invalid password");
-        /*else if (tv_pass.getText().toString() == null || tv_pass.getText().toString().length() < 12) {
-            tv_pass.setError("Password must be at least 12 characters!");*/
         }
         else if (height < 0 || 300 < height) {
             tv_height.setError("Height must be between 0 and 300!");
@@ -127,9 +97,5 @@ public class RegisterFragment extends Fragment implements View.OnClickListener{
         else if (age < 1900 || 2022 < age) {
             tv_age.setError("Year of born must be between 1900 and 2022!");
         }
-        else {
-            System.out.println("Pääohjelmassa false, käyttäjää ei luotu, anna virheilmoitus");
-        }
     }
-
 }
