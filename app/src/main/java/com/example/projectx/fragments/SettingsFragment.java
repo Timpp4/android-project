@@ -16,6 +16,8 @@ import android.widget.Button;
 
 import com.example.projectx.R;
 
+import java.util.Objects;
+
 
 public class SettingsFragment extends Fragment {
 
@@ -30,13 +32,10 @@ public class SettingsFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_settings, container, false);
         btnToggle = v.findViewById(R.id.btnToggle);
 
-        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("prefs", Context.MODE_PRIVATE);
-        final SharedPreferences.Editor editor = sharedPreferences.edit();
+        SharedPreferences sharedPreferences = Objects.requireNonNull(this.getActivity()).getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        @SuppressLint("CommitPrefEdits") final SharedPreferences.Editor editor = sharedPreferences.edit();
         //Creating dark mode state to sharedPreference memory
         final boolean isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn", false);
-
-
-
 
         // Check if dark mode is on
         if (isDarkModeOn){
