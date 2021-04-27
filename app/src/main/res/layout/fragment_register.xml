@@ -41,7 +41,7 @@
         android:id="@+id/et_password"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:hint="Password"
+        android:hint="@string/password"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
@@ -54,7 +54,7 @@
         android:id="@+id/et_height"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:hint="Height"
+        android:hint="@string/height"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
@@ -68,7 +68,7 @@
         android:id="@+id/et_weight"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:hint="Weight"
+        android:hint="@string/weight"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
@@ -87,7 +87,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"
-        android:hint="Year of born i.e 1997"
+        android:hint="@string/year_of_born_i_e_1997"
         android:inputType="number"
         android:padding="15dp"
         android:textSize="15sp" />
@@ -114,7 +114,7 @@
         android:layout_marginTop="14dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/btn_custom"
-        android:text="Sign up"
+        android:text="@string/sign_up"
         android:textColor="@android:color/white" />
 
 
