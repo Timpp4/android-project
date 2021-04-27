@@ -27,18 +27,4 @@ public class BmiCalculator {
         this.height = height;
     }
 
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
-
-    public void setBmi(double bmi) {
-        this.bmi = bmi;
-    }
-
-    public double getBmi(double weight, double height) {
-        return calculateBmi(weight, height);
-    }
-    public String getAnalysis(double bmi){
-        return bmiAnalysis(bmi);
-    }
 }
