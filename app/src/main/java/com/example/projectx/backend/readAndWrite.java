@@ -323,6 +323,7 @@ public class readAndWrite {
     public String removeData(Integer id) {
         String username = getUsername();
         String profile_data="";
+        String profile_data_toFile="";
         try {
             File path = context.getExternalFilesDir(null);
             File file = new File(path, username + ".txt");
@@ -343,9 +344,11 @@ public class readAndWrite {
             while (i < arrayLength) {
                 if (i==0) {
                     profile_data = profile_data + i + " --- " + line_parsed[i] + "\n";
+                    profile_data_toFile = profile_data_toFile + line_parsed[i] + "\n";
                 } else if (id==i) {
                     idBoolean = true;
                 } else if (id != i) {
+                    profile_data_toFile = profile_data_toFile + line_parsed[i] + "\n";
                     if (idBoolean == false) {
                         profile_data = profile_data + i + " --- " + line_parsed[i] + "\n";
                     } else {
@@ -355,15 +358,20 @@ public class readAndWrite {
                 i++;
             }
 
+            File fileNew = new File(path, username + ".txt");
+            FileOutputStream stream = new FileOutputStream(file);
+            stream.write(profile_data_toFile.getBytes());
+            stream.close();
+
         } catch (Exception e) {
             System.out.println("vIRHE removedata() " + e);
         }
         return profile_data;
-
-
-
-
     }
+
+
+
+
 
 
 

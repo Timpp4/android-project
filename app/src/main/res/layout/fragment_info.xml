@@ -15,7 +15,7 @@
         android:layout_marginLeft="16dp"
         android:textColor="@color/black"
         android:background="@drawable/rounded_corner"
-        android:hint="Data:"
+        android:hint="@string/data"
         android:padding="16dp" />
 
     <EditText
@@ -29,9 +29,8 @@
         android:background="@drawable/rounded_corner"
         android:gravity="top"
         android:textColor="@color/black"
-        android:hint="Insert id to remove:"
+        android:hint="@string/insert_id_to_remove"
         android:inputType="number"
-        android:numeric="integer"
         android:padding="16dp" />
 
     <com.google.android.material.button.MaterialButton
@@ -44,5 +43,5 @@
         android:layout_marginTop="16dp"
         android:padding="16dp"
         app:cornerRadius="100dp"
-        android:text="Remove" />
+        android:text="@string/remove" />
 </RelativeLayout>

@@ -21,14 +21,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
         android:layout_marginTop="106dp"
         android:layout_marginEnd="259dp"
-        android:hint="dd/mm/yyyy"
+        android:hint="@string/dd_mm_yyyy"
         android:inputType="date"
         android:textSize="20sp" />
 
@@ -37,13 +35,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="290dp"
         android:layout_marginTop="107dp"
         android:layout_marginEnd="10dp"
-        android:hint="Insert kg:"
+        android:hint="@string/insert_kg"
         android:inputType="numberDecimal"
         android:textSize="20sp" />
 
@@ -57,7 +54,7 @@
         android:layout_marginStart="143dp"
         android:layout_marginTop="173dp"
         android:layout_marginEnd="138dp"
-        android:hint="Insert weight"
+        android:hint="@string/insert_weight"
         android:textColorHint="#FFFFFF" />
 
     <TextView
@@ -66,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
-        android:text="Your BMI"
+        android:text="@string/your_bmi"
         android:textSize="25sp"
         android:textStyle="bold" />
 
@@ -76,7 +73,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/bmiText"
         android:layout_centerHorizontal="true"
-        android:hint="56,48 "
         android:textSize="20sp" />
 
     <Spinner
