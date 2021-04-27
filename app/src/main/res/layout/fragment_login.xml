@@ -35,7 +35,7 @@
         android:id="@+id/et_email"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:hint="Username"
+        android:hint="@string/username"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:padding="15dp"
@@ -47,7 +47,7 @@
         android:id="@+id/et_password"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:hint="Password"
+        android:hint="@string/password"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
@@ -66,7 +66,7 @@
         android:layout_marginTop="15dp"
         android:background="@drawable/btn_custom"
         android:textColor="@android:color/white"
-        android:text="Log in"/>
+        android:text="@string/log_in"/>
 
 
 
