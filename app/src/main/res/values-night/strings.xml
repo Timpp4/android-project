@@ -3,7 +3,7 @@
     <!-- Strings related to login -->
     <string name="register_header">Register</string>
     <string name="register_subtitle">Input your information below!</string>
-    <string name="header_name">Deror App</string>
+    <string name="header_name">BMI Tracker</string>
     <string name="subtitle">Welcome!</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
