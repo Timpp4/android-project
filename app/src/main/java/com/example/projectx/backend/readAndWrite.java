@@ -339,7 +339,6 @@ public class readAndWrite {
                 }
                 i++;
             }
-            File fileNew = new File(path, username + ".txt");
             FileOutputStream stream = new FileOutputStream(file);
             stream.write(profile_data_toFile.toString().getBytes());
             stream.close();
