@@ -86,7 +86,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String yourBmi = refreshYourBmi();
-                TextView tv = getView().findViewById(R.id.lastBmi);
+                TextView tv = Objects.requireNonNull(getView()).findViewById(R.id.lastBmi);
                 tv.setText(yourBmi);
                 mpLineChart.invalidate();
                 mpLineChart.clear();
